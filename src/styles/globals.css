@@ -164,7 +164,7 @@ textarea::placeholder {
 }
 
 textarea {
-  height: 70px;
+  max-height: 70px;
 }
 
 label {
