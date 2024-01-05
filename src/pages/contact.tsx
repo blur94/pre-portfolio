@@ -79,10 +79,10 @@ export default function contactPage() {
   return (
     <>
       <ThemeIcon
-        mt={50}
+        my={{ base: 30, md: 50 }}
         w={100}
         variant="light"
-        ml={150}
+        ml={{ base: 15, md: 150 }}
         onClick={back}
         style={{ cursor: "pointer" }}
       >
