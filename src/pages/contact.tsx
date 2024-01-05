@@ -1,4 +1,6 @@
 import useNotification from "@/hooks/useNotification";
+import { ThemeIcon } from "@mantine/core";
+import { IconArrowLeft, IconChevronRight } from "@tabler/icons-react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
@@ -21,7 +23,7 @@ export default function contactPage() {
   const [visible, setVisible] = useState(false);
 
   const { handleSuccess, handleError } = useNotification();
-  const { push } = useRouter();
+  const { push, back } = useRouter();
 
   const handleValidation = () => {
     const re = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$");
@@ -75,85 +77,97 @@ export default function contactPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <form
-        onSubmit={handleSubmit}
-        className="shadow-2xl p-5 bg-white rounded-lg"
+    <>
+      <ThemeIcon
+        mt={50}
+        w={100}
+        variant="light"
+        ml={150}
+        onClick={back}
+        style={{ cursor: "pointer" }}
       >
-        <p className="text-[#a572c5] mb-5 text-2xl">Send a message</p>
+        <IconArrowLeft color="#a572c5" size={30} />
+      </ThemeIcon>
+      <main className="flex h-3/4 items-center justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="shadow-2xl p-5 bg-white rounded-lg"
+        >
+          <p className="text-[#a572c5] mb-5 text-2xl">Send a message</p>
 
-        <div className="mb-5">
-          <label htmlFor="name">
-            Full Name
-            <input
-              type="text"
-              name="name"
-              // required
-              placeholder="Enter Name"
-              value={details.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-            />
-            <p className="text-red-500 text-[10px] mt-0">
-              {errors && errors.name}
-            </p>
-          </label>
-        </div>
+          <div className="mb-5">
+            <label htmlFor="name">
+              Full Name
+              <input
+                type="text"
+                name="name"
+                // required
+                placeholder="Enter Name"
+                value={details.name}
+                onChange={(e) => handleChange("name", e.target.value)}
+              />
+              <p className="text-red-500 text-[10px] mt-0">
+                {errors && errors.name}
+              </p>
+            </label>
+          </div>
 
-        <div className="mb-5">
-          <label htmlFor="email">
-            Email
-            <input
-              type="text"
-              name="email"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              // required
-              placeholder="Enter Email Address"
-              value={details.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-            />
-            <p className="text-red-500 text-[10px] mt-0">
-              {errors && errors.email}
-            </p>
-          </label>
-        </div>
+          <div className="mb-5">
+            <label htmlFor="email">
+              Email
+              <input
+                type="text"
+                name="email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                // required
+                placeholder="Enter Email Address"
+                value={details.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+              />
+              <p className="text-red-500 text-[10px] mt-0">
+                {errors && errors.email}
+              </p>
+            </label>
+          </div>
 
-        <div className="mb-5">
-          <label htmlFor="subject">
-            Subject
-            <input
-              type="text"
-              name="subject"
-              // required
-              placeholder="Enter Subject"
-              value={details.subject}
-              onChange={(e) => handleChange("subject", e.target.value)}
-            />
-            <p className="text-red-500 text-[10px] mt-0">
-              {errors && errors.subject}
-            </p>
-          </label>
-        </div>
+          <div className="mb-5">
+            <label htmlFor="subject">
+              Subject
+              <input
+                type="text"
+                name="subject"
+                // required
+                placeholder="Enter Subject"
+                value={details.subject}
+                onChange={(e) => handleChange("subject", e.target.value)}
+              />
+              <p className="text-red-500 text-[10px] mt-0">
+                {errors && errors.subject}
+              </p>
+            </label>
+          </div>
 
-        <div className="mb-5">
-          <label htmlFor="message">
-            Message
-            <textarea
-              name="Message"
-              placeholder="Enter Message"
-              value={details.message}
-              cols={30}
-              onChange={(e) => handleChange("message", e.target.value)}
-            />
-            <p className="text-red-500 text-[10px] mt-0">
-              {errors && errors.message}
-            </p>
-          </label>
-        </div>
+          <div className="mb-5">
+            <label htmlFor="message">
+              Message
+              <textarea
+                name="Message"
+                placeholder="Enter Message"
+                value={details.message}
+                cols={30}
+                onChange={(e) => handleChange("message", e.target.value)}
+              />
+              <p className="text-red-500 text-[10px] mt-0">
+                {errors && errors.message}
+              </p>
+            </label>
+          </div>
 
-        <button className="btn" type="submit">
-          {visible ? "Sending..." : "Send"}
-        </button>
-      </form>
-    </main>
+          <button className="btn" type="submit">
+            {visible ? "Sending..." : "Send"}
+          </button>
+        </form>
+      </main>
+    </>
   );
 }
