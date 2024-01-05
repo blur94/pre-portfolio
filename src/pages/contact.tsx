@@ -63,7 +63,7 @@ export default function contactPage() {
 
       const { data: res } = await axios.post("/api/email", details);
 
-      handleSuccess(res.entity, res.message);
+      // handleSuccess(res.entity, res.message);
       push("/");
     } catch (error) {
       return handleError("Email Not Sent", error as string);
