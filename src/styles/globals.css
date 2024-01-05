@@ -119,7 +119,7 @@ body {
 
 .title {
   p {
-    font-size: 60px;
+    /* font-size: 60px; */
     width: 53%;
 
     span {
@@ -142,7 +142,7 @@ body {
 input,
 textarea {
   display: block;
-  width: 30vw;
+  width: 80vw;
   /* border-radius: 10px; */
   padding: 5px;
   border-bottom: 1px solid #dedede;
@@ -154,6 +154,13 @@ textarea {
   :hover {
     outline: 1px solid #a572c5;
     outline-offset: 5px;
+  }
+}
+
+@media (min-width: 768px) {
+  input,
+  textarea {
+    width: 50vw;
   }
 }
 
