@@ -1,3 +1,6 @@
+import useNotification from "@/hooks/useNotification";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 type Details = {
@@ -15,11 +18,16 @@ export default function contactPage() {
     message: "",
   });
   const [errors, setErrors] = useState<Details | undefined>();
+  const [visible, setVisible] = useState(false);
 
-  const handleValidation = (e: FormEvent) => {
+  const { handleSuccess, handleError } = useNotification();
+  const { push } = useRouter();
+
+  const handleValidation = () => {
     const re = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$");
-    e.preventDefault();
+
     let error: Details = {} as Details;
+
     if (!details.name) {
       error["name"] = "Full Name is required";
     }
@@ -39,6 +47,27 @@ export default function contactPage() {
     }
 
     setErrors({ ...error });
+    return error;
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setVisible(true);
+      const error = handleValidation();
+      const hasError = Object.keys(error).length > 0;
+      if (hasError) return;
+
+      const { data: res } = await axios.post("/api/email", details);
+
+      handleSuccess(res.entity, res.message);
+      push("/");
+    } catch (error) {
+      return handleError("Email Not Sent", error as string);
+    } finally {
+      setVisible(false);
+    }
   };
 
   const handleChange = (prop: keyof Details, value: string) => {
@@ -48,7 +77,7 @@ export default function contactPage() {
   return (
     <main className="flex min-h-screen items-center justify-center">
       <form
-        onSubmit={handleValidation}
+        onSubmit={handleSubmit}
         className="shadow-2xl p-5 bg-white rounded-lg"
       >
         <p className="text-[#a572c5] mb-5 text-2xl">Send a message</p>
@@ -122,7 +151,7 @@ export default function contactPage() {
         </div>
 
         <button className="btn" type="submit">
-          Send
+          {visible ? "Sending..." : "Send"}
         </button>
       </form>
     </main>

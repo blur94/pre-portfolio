@@ -21,19 +21,19 @@ export default function Home() {
           {/* <p>Software Developer</p> */}
         </div>
         <div>
-          <p className="text-gray-300 text-7xl">Hi, I'm {bio.firstName}.</p>
-          <p className="text-slate-300 text-sm">
+          <p className="text-7xl">Hi, I'm {bio.firstName}.</p>
+          <p className="text-sm">
             This page is currently under construction. But you can follow me on{" "}
             <Link
               href="https://twitter.com/balmofcodes"
-              className="text-slate-50"
+              className="text-blue-700"
             >
               Twitter
             </Link>{" "}
             and{" "}
             <Link
               href="https://instagram.com/balmofcodes"
-              className="text-slate-50"
+              className="text-blue-700"
             >
               Instagram
             </Link>{" "}
