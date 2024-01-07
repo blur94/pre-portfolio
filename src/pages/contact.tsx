@@ -1,24 +1,12 @@
 import useNotification from "@/hooks/useNotification";
 import { ThemeIcon } from "@mantine/core";
-import { IconArrowLeft, IconChevronRight } from "@tabler/icons-react";
-import axios, { AxiosError } from "axios";
+import { IconArrowLeft } from "@tabler/icons-react";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
-type Details = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
-
-export default function contactPage() {
-  const [details, setDetails] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+export default function ContactPage() {
+  const [details, setDetails] = useState(initialDetails);
   const [errors, setErrors] = useState<Details | undefined>();
   const [visible, setVisible] = useState(false);
 
@@ -63,7 +51,7 @@ export default function contactPage() {
 
       const { data: res } = await axios.post("/api/email", details);
 
-      // handleSuccess(res.entity, res.message);
+      handleSuccess(res.entity, res.message);
       push("/");
     } catch (error) {
       return handleError("Email Not Sent", error as string);
@@ -171,3 +159,17 @@ export default function contactPage() {
     </>
   );
 }
+
+type Details = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+const initialDetails = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+};
