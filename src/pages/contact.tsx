@@ -49,7 +49,8 @@ export default function ContactPage() {
       const hasError = Object.keys(error).length > 0;
       if (hasError) return;
 
-      const { data: res } = await axios.post("/api/email", details);
+      const { data: res } = await axios.post("/api/send-email", details);
+      // const { data: res } = await axios.post("/api/email", details);
 
       handleSuccess(res.entity, res.message);
       push("/");
