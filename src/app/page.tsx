@@ -96,7 +96,7 @@ export default function Home() {
               </Magnet>
 
               <div className="flex items-center gap-3">
-                <Magnet padding={40} magnetStrength={4}>
+                <Magnet padding={25} magnetStrength={6}>
                   <a
                     href="https://x.com/balmofcodes"
                     target="_blank"
@@ -109,7 +109,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       width="22"
                       height="22"
-                      className="block"
+                      className="block fill-current"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <title>X</title>
@@ -117,7 +117,7 @@ export default function Home() {
                     </svg>
                   </a>
                 </Magnet>
-                <Magnet padding={40} magnetStrength={4}>
+                <Magnet padding={25} magnetStrength={6}>
                   <a
                     href="https://instagram.com/balmofcodes"
                     target="_blank"
@@ -130,7 +130,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       width="22"
                       height="22"
-                      className="block"
+                      className="block fill-current"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <title>Instagram</title>

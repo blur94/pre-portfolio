@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Sora } from "next/font/google";
 import type { ReactNode } from "react";
 
@@ -36,6 +36,12 @@ export const metadata: Metadata = {
       "Portfolio of Gilead Odo — software developer exploring the intersection of design, music, and code.",
     creator: "@balmofcodes",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
