@@ -1,16 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 
-type Data = {
-  entity?: string;
-  message: string;
-};
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  const { email, name, subject, message } = req.body;
+export async function POST(req: Request) {
+  const { email, name, subject, message } = await req.json();
   const apiKey = process.env.SENDGRID_API_KEY;
 
   if (!apiKey) return;
@@ -50,12 +42,12 @@ export default async function handler(
     ></div>
     <div class="container" style="margin-left: 20px; margin-right: 20px">
       <h3>
-        You've got a new mail from ${req.body.name}, their email is:
-        ✉️${req.body.email}
+        You've got a new mail from ${name}, their email is:
+        ✉️${email}
       </h3>
       <div style="font-size: 16px">
         <p>Message:</p>
-        <p>${req.body.message}</p>
+        <p>${message}</p>
         <br />
       </div>
       <img
@@ -114,17 +106,14 @@ export default async function handler(
 
   `,
   };
-  if (req.method === "POST") {
-    try {
-      await sgMail.send(msg);
-      res
-        .status(200)
-        .json({ entity: "Email", message: "Email sent successfully" });
-
-      // return res.redirect(307, "/");
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: error as string });
-    }
+  try {
+    await sgMail.send(msg);
+    return NextResponse.json(
+      { entity: "Email", message: "Email sent successfully" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: String(error) }, { status: 500 });
   }
 }
