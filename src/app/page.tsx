@@ -51,7 +51,7 @@ export default function Home() {
           <SplitText
             text="Gilead Odo"
             tag="h1"
-            className="text-6xl leading-tight font-normal tracking-tight md:text-8xl lg:text-9xl"
+            className="text-5xl leading-tight font-normal tracking-tight sm:text-6xl md:text-8xl lg:text-9xl"
             textAlign="left"
             splitType="chars"
             delay={40}
