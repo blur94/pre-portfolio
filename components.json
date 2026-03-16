@@ -17,7 +17,6 @@
     "hooks": "@/hooks"
   },
   "iconLibrary": "lucide",
-  "preset": "aImejqs",
   "registries": {
     "@react-bits": "https://reactbits.dev/r/{name}.json"
   }

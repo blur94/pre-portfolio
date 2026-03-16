@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 
-type Data = {
-  entity?: string;
-  message: string;
-};
-
-export default async function POST(req: Request, res: NextResponse<Data>) {
+export async function POST(req: Request) {
   const { email, name, subject, message } = await req.json();
   const apiKey = process.env.SENDGRID_API_KEY;
 
@@ -111,21 +106,14 @@ export default async function POST(req: Request, res: NextResponse<Data>) {
 
   `,
   };
-  if (req.method === "POST") {
-    try {
-      await sgMail.send(msg);
-      return NextResponse.json({
-        status: 200,
-        body: { entity: "Email", message: "Email sent successfully" },
-      });
-
-      // return res.redirect(307, "/");
-    } catch (error) {
-      console.error(error);
-      return NextResponse.json({
-        status: 500,
-        body: { message: error as string },
-      });
-    }
+  try {
+    await sgMail.send(msg);
+    return NextResponse.json(
+      { entity: "Email", message: "Email sent successfully" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: String(error) }, { status: 500 });
   }
 }
