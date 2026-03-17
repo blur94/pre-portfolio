@@ -10,7 +10,7 @@ A personal "coming soon" / pre-launch portfolio page for Gilead Odo, displayed w
 - **Icons**: Lucide React (`lucide-react`)
 - **Styling**: Tailwind CSS v4 CSS-first (`tw-animate-css`, `shadcn/tailwind.css`)
 - **Theming**: next-themes 0.4 (with custom `ThemeProvider` + `ThemeHotkey`)
-- **Email**: SendGrid (`@sendgrid/mail`) + Nodemailer (alternative)
+- **Email**: Resend (`resend`)
 - **HTTP Client**: Axios
 - **Package Manager**: pnpm
 
@@ -37,8 +37,7 @@ src/
     utils.ts             # cn() utility (clsx + tailwind-merge)
   pages/
     api/
-      send-email.ts      # SendGrid email API route (active)
-      email.ts           # Nodemailer email API route (alternative)
+      send-email.ts      # Resend email API route (active)
       hello.ts           # Default Next.js hello route
 public/                  # Static assets
 ```
@@ -54,9 +53,9 @@ public/                  # Static assets
 
 ## Environment Variables
 
-| Variable           | Description                        |
-| ------------------ | ---------------------------------- |
-| `SENDGRID_API_KEY` | SendGrid API key for sending email |
+| Variable         | Description                      |
+| ---------------- | -------------------------------- |
+| `RESEND_API_KEY` | Resend API key for sending email |
 
 Set these in a `.env.local` file (not committed to git).
 
@@ -71,8 +70,7 @@ pnpm lint     # Run ESLint
 
 ## Email Flow
 
-Contact form (`/contact`) → `POST /api/send-email` → SendGrid → `odogilead@gmail.com`
+Contact form (`/contact`) → `POST /api/send-email` → Resend → `odogilead@gmail.com`
 
 - Sender address: `info@gileadodo.xyz`
 - Email template is an inline HTML string in `send-email.ts`
-- An alternative Nodemailer route exists at `api/email.ts` but is not currently used
