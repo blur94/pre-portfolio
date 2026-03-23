@@ -91,3 +91,16 @@
     }
   }
 }
+
+/* Prevent GSAP SplitText wrappers from clipping italic swashes */
+.split-parent {
+  overflow: visible !important;
+  padding-top: 0.2em;
+}
+
+.split-parent *,
+.split-line,
+.split-word,
+.split-char {
+  overflow: visible !important;
+}

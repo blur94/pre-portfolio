@@ -120,7 +120,7 @@ export default function ContactPage() {
           <SplitText
             text="Get in touch"
             tag="h1"
-            className="pr-3 text-5xl leading-tight font-normal tracking-tight md:text-7xl"
+            className="pr-3 text-5xl leading-normal font-normal tracking-tight md:text-7xl"
             textAlign="left"
             splitType="chars"
             delay={35}

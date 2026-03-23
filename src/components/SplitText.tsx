@@ -102,6 +102,21 @@ const SplitText: React.FC<SplitTextProps> = ({
         reduceWhiteSpace: false,
         onSplit: (self: GSAPSplitText) => {
           assignTargets(self);
+          // Force overflow:visible on ALL GSAP-generated wrappers to prevent
+          // clipping of italic font swashes (e.g. tall "G" in Instrument Serif)
+          const forceOverflowVisible = () => {
+            el.querySelectorAll('div, span').forEach((wrapper) => {
+              (wrapper as HTMLElement).style.overflow = 'visible';
+            });
+          };
+          forceOverflowVisible();
+
+          // Use MutationObserver to catch any re-application of overflow:hidden by GSAP
+          const observer = new MutationObserver(() => forceOverflowVisible());
+          observer.observe(el, { attributes: true, subtree: true, attributeFilter: ['style'] });
+          // Clean up observer after animations finish
+          setTimeout(() => observer.disconnect(), (duration + (delay * targets.length / 1000)) * 1000 + 500);
+
           return gsap.fromTo(
             targets,
             { ...from },
@@ -158,7 +173,7 @@ const SplitText: React.FC<SplitTextProps> = ({
   const renderTag = () => {
     const style: React.CSSProperties = {
       textAlign,
-      display: 'inline-block',
+      display: 'block',
       whiteSpace: 'normal',
       wordWrap: 'break-word',
       willChange: 'transform, opacity'
