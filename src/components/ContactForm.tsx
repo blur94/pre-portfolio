@@ -73,8 +73,12 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
-        <div className="grid gap-6 sm:grid-cols-2">
+    <form
+      onSubmit={handleSubmit}
+      className="mx-auto flex w-full max-w-xl flex-col gap-5"
+      noValidate
+    >
+        <div className="grid gap-5 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
             <Label
               htmlFor="name"
@@ -135,28 +139,30 @@ export function ContactForm() {
             value={details.message}
             onChange={(event) => handleChange("message", event.target.value)}
             aria-invalid={Boolean(errors.message)}
-            className="min-h-35 resize-none border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50"
+            className="min-h-28 resize-none border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50 md:min-h-32"
           />
           {errors.message ? (
             <p className="text-xs text-destructive">{errors.message}</p>
           ) : null}
         </div>
 
-        <Magnet padding={50} magnetStrength={3}>
-          <Button
-            type="submit"
-            size="lg"
-            className="group w-full gap-2 px-8 font-medium sm:w-auto"
-            disabled={submitting}
-          >
-            {submitting ? "Sending..." : "Send message"}
-            <Send
-              data-icon="inline-end"
-              aria-hidden="true"
-              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </Button>
-        </Magnet>
+        <div className="flex justify-start">
+          <Magnet padding={50} magnetStrength={3}>
+            <Button
+              type="submit"
+              size="lg"
+              className="group w-full gap-2 px-8 font-medium sm:w-auto"
+              disabled={submitting}
+            >
+              {submitting ? "Sending..." : "Send message"}
+              <Send
+                data-icon="inline-end"
+                aria-hidden="true"
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </Button>
+          </Magnet>
+        </div>
 
         {status ? (
           <p

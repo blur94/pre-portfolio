@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-0 flex-1 overflow-hidden">
       {/* Aurora background */}
       <div className="absolute inset-0 opacity-30">
         <Aurora
@@ -34,7 +34,7 @@ export default function ContactPage() {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-2xl px-6 py-16 md:px-12">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-2xl flex-col justify-center px-6 py-8 md:px-12 md:py-10">
         <ContactHero />
         <ContactForm />
       </div>

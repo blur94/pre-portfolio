@@ -65,7 +65,7 @@ export function Nav() {
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="w-72 border-border/40 bg-background px-6 pt-12"
+            className="w-72 border-zinc-300 bg-zinc-50 px-6 pt-12 text-zinc-950 dark:border-white/10 dark:bg-zinc-950 dark:text-white"
           >
             <nav className="flex flex-col gap-8">
               <div className="flex flex-col gap-5">
@@ -74,7 +74,7 @@ export function Nav() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="text-2xl font-semibold text-foreground transition-colors hover:text-primary"
+                    className="rounded-sm text-2xl font-semibold text-zinc-950 transition-colors hover:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-4 focus-visible:ring-offset-zinc-50 dark:text-white dark:hover:text-primary dark:focus-visible:ring-zinc-600 dark:focus-visible:ring-offset-zinc-950"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {link.label}
@@ -82,14 +82,14 @@ export function Nav() {
                 ))}
               </div>
 
-              <div className="flex flex-col gap-3 border-t border-border/40 pt-6">
+              <div className="flex flex-col gap-3 border-t border-zinc-300 pt-6 dark:border-white/10">
                 {socialLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="rounded-sm text-sm text-zinc-700 transition-colors hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-3 focus-visible:ring-offset-zinc-50 dark:text-zinc-400 dark:hover:text-white dark:focus-visible:ring-zinc-600 dark:focus-visible:ring-offset-zinc-950"
                   >
                     {link.label}
                   </a>

@@ -33,6 +33,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `DESIGN.md` with full Figma token extraction (colors, typography, spacing, border-radius, icons)
 
 ### Changed
+- Removed vertical overflow from the contact page by fitting it to the layout's remaining viewport height
+- Centered the contact form within the contact page content column while keeping the submit action left-aligned
+- Improved light-mode contrast and focus styling for the hamburger menu sheet
 - Improved light-mode contrast for the GridMotion error and not-found pages
 - Removed vertical overflow from the not-found page by letting it fill the layout's remaining viewport height
 - Recentered the not-found GridMotion background after the no-scroll layout adjustment
