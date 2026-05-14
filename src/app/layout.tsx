@@ -25,12 +25,36 @@ const inter = Inter({
 
 const visbyCF = localFont({
   src: [
-    { path: "../assets/fonts/visby/VisbyCF-Medium.otf", weight: "500", style: "normal" },
-    { path: "../assets/fonts/visby/VisbyCF-MediumOblique.otf", weight: "500", style: "italic" },
-    { path: "../assets/fonts/visby/VisbyCF-DemiBold.otf", weight: "600", style: "normal" },
-    { path: "../assets/fonts/visby/VisbyCF-DemiBoldOblique.otf", weight: "600", style: "italic" },
-    { path: "../assets/fonts/visby/VisbyCF-Bold.otf", weight: "700", style: "normal" },
-    { path: "../assets/fonts/visby/VisbyCF-BoldOblique.otf", weight: "700", style: "italic" },
+    {
+      path: "../assets/fonts/visby/VisbyCF-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/visby/VisbyCF-MediumOblique.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../assets/fonts/visby/VisbyCF-DemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/visby/VisbyCF-DemiBoldOblique.otf",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "../assets/fonts/visby/VisbyCF-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/visby/VisbyCF-BoldOblique.otf",
+      weight: "700",
+      style: "italic",
+    },
   ],
   variable: "--font-heading",
 });
@@ -71,7 +95,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ThemeHotkey />
-          <div className="flex min-h-screen flex-col">
+          <div className="flex min-h-screen flex-col overflow-x-hidden">
             <Nav />
             <main className="flex-1">{children}</main>
             <Footer />

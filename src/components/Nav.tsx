@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 
@@ -20,6 +21,8 @@ const navLinks = [
 ];
 
 export function Nav() {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="flex items-center justify-between px-6 py-5 md:px-10">
       <Link
@@ -47,7 +50,7 @@ export function Nav() {
         </div>
 
         {/* Hamburger — always visible */}
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
             render={
               <Button
@@ -70,6 +73,7 @@ export function Nav() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    onClick={() => setOpen(false)}
                     className="text-2xl font-semibold text-foreground transition-colors hover:text-primary"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
