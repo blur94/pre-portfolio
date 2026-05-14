@@ -8,6 +8,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 
 ### Added
+- ReactBits-inspired GridMotion treatment for the app error and not-found pages, with portfolio-specific copy and navigation actions
+- Phase 5 Works detail page: typed project detail data, static params, project hero, screenshot, content sections, code block, gallery, and `/works/[slug]` assembly
 - Phase 2 Home page: `HeroSection`, `WorksIntro`, `ProjectRow`, `ArticlesSection`, `ArticleCard`
 - `src/lib/works.ts` — typed static data for 5 projects (LegiPro, VerivAfrica, APAS, Qatapolt Admin, Recurrent.ng)
 - Converted `src/app/page.tsx` to a server component assembler
@@ -30,6 +32,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `DESIGN.md` with full Figma token extraction (colors, typography, spacing, border-radius, icons)
 
 ### Changed
+- Improved light-mode contrast for the GridMotion error and not-found pages
+- Removed vertical overflow from the not-found page by letting it fill the layout's remaining viewport height
+- Recentered the not-found GridMotion background after the no-scroll layout adjustment
+- Marked interactive visual components as client components where required by Next.js builds
 - Migrated email sending from Nodemailer to Resend
 - Moved `pnpm onlyBuiltDependencies` config from `pnpm-workspace.yaml` to `package.json`
 

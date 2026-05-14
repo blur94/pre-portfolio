@@ -21,7 +21,7 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 ### Current Task: Implementation
 
-**Status:** Phase 2 complete. Phase 3 (About Me page) is next.
+**Status:** Phase 5 complete. Phase 6 (Contact page) is in progress.
 
 **Pages:** 5 total (Home, Works, Works > View, Contact, About Me)
 **Design reference:** Screenshots provided. About Me page screenshot not yet shared.
@@ -129,14 +129,14 @@ Design screenshot not yet provided. Defer until screenshot is shared.
 - [x] Reuse `<WorksIntro>` + `<ProjectRow>` from Phase 2
 - [x] Assemble `src/app/works/page.tsx`
 
-**Phase 5 — Works > View**
-- [ ] Define project data type and static data file
-- [ ] `<ProjectHero>`
-- [ ] `<ProjectScreenshot>`
-- [ ] `<ContentSection>` (reusable)
-- [ ] `<CodeBlock>`
-- [ ] `<ProjectGallery>`
-- [ ] Assemble `src/app/works/[slug]/page.tsx`
+**Phase 5 — Works > View** ✅ COMPLETE
+- [x] Define project data type and static data file
+- [x] `<ProjectHero>`
+- [x] `<ProjectScreenshot>`
+- [x] `<ContentSection>` (reusable)
+- [x] `<CodeBlock>`
+- [x] `<ProjectGallery>`
+- [x] Assemble `src/app/works/[slug]/page.tsx`
 
 **Phase 6 — Contact page**
 - [ ] `<ContactHero>`

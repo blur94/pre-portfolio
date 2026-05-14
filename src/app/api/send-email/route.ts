@@ -2,12 +2,43 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import ContactFormNotification from "@/components/ContactFormNotification";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+type ContactPayload = {
+  email?: unknown;
+  name?: unknown;
+  subject?: unknown;
+  message?: unknown;
+};
+
+const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 export async function POST(req: Request) {
-  const { email, name, subject, message } = await req.json();
+  const payload = (await req.json()) as ContactPayload;
+  const name = typeof payload.name === "string" ? payload.name.trim() : "";
+  const email = typeof payload.email === "string" ? payload.email.trim() : "";
+  const message =
+    typeof payload.message === "string" ? payload.message.trim() : "";
+  const subject =
+    typeof payload.subject === "string" && payload.subject.trim()
+      ? payload.subject.trim()
+      : `New portfolio message from ${name || "a visitor"}`;
+
+  if (!name || !email || !message || !isValidEmail(email)) {
+    return NextResponse.json(
+      { message: "Name, valid email, and message are required." },
+      { status: 400 },
+    );
+  }
+
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json(
+      { message: "Email service is not configured." },
+      { status: 500 },
+    );
+  }
 
   try {
+    const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
       to: "odogilead@gmail.com",
       from: "Gilead Odo <info@mail.gileadodo.com>",
