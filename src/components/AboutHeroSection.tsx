@@ -39,11 +39,14 @@ export function AboutHeroSection() {
 
       {/* Full-width photo */}
       <AnimatedContent distance={30} duration={0.8} delay={0.4}>
-        <div className="relative mt-12 aspect-[16/7] w-full overflow-hidden rounded-2xl bg-zinc-900/60">
+        <div className="relative mt-12 h-75 w-full overflow-hidden rounded-2xl border border-dashed border-border bg-muted md:h-105 lg:h-125">
           {/* Swap in: <Image src="/about-photo.jpg" alt="Gilead Odo" fill className="object-cover grayscale" /> */}
-          <div className="flex h-full items-end p-6">
-            <span className="text-xs text-muted-foreground/30">
-              full-width photo
+          <div className="flex h-full items-center justify-center">
+            <span
+              className="text-xs text-muted-foreground/40"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Profile photo
             </span>
           </div>
         </div>
