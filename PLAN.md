@@ -116,19 +116,18 @@ Design screenshot not yet provided. Defer until screenshot is shared.
 - [x] Assembled `src/app/page.tsx` as a server component
 - [x] Browser verified at 1440px desktop — no console errors
 
-**Phase 3 — About Me page**
-- [ ] `<HeroSection>` (centered layout: title centered, photo full-width below) — variant of Phase 2 component
-- [ ] `<StatsRow>`
-- [ ] `<BioBlock>` with CTA buttons
-- [ ] `<TechStacksCard>`
-- [ ] `<ExperienceCard>`
-- [ ] `<PictureGallery>`
-- [ ] Assemble `src/app/about/page.tsx`
+**Phase 3 — About Me page** ✅ COMPLETE
+- [x] `<AboutHeroSection>` — centered heading + full-width photo placeholder
+- [x] `<StatsRow>`
+- [x] `<BioBlock>` with CTA buttons
+- [x] `<TechStacksCard>`
+- [x] `<ExperienceCard>`
+- [x] `<PictureGallery>`
+- [x] Assemble `src/app/about/page.tsx`
 
-**Phase 4 — Works page**
-- [ ] `<WorksIntro>`
-- [ ] Reuse `<ProjectRow>` from Phase 2
-- [ ] Assemble `src/app/works/page.tsx`
+**Phase 4 — Works page** ✅ COMPLETE
+- [x] Reuse `<WorksIntro>` + `<ProjectRow>` from Phase 2
+- [x] Assemble `src/app/works/page.tsx`
 
 **Phase 5 — Works > View**
 - [ ] Define project data type and static data file
