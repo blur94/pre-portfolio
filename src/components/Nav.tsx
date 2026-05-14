@@ -6,6 +6,7 @@ import { Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Logo } from "@/components/Logo";
 
 const socialLinks = [
   { label: "Instagram", href: "https://instagram.com/balmofcodes" },
@@ -25,13 +26,7 @@ export function Nav() {
 
   return (
     <header className="flex items-center justify-between px-6 py-5 md:px-10">
-      <Link
-        href="/"
-        className="text-sm font-semibold tracking-tight text-foreground"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        BalmofCodes
-      </Link>
+      <Logo asLink />
 
       <div className="flex items-center gap-6">
         {/* Social links — visible on md+ */}
