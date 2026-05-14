@@ -21,7 +21,7 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 ### Current Task: Implementation
 
-**Status:** Phase 5 complete. Phase 6 (Contact page) is in progress.
+**Status:** Phase 6 complete. Core portfolio pages are implemented.
 
 **Pages:** 5 total (Home, Works, Works > View, Contact, About Me)
 **Design reference:** Screenshots provided. About Me page screenshot not yet shared.
@@ -138,10 +138,10 @@ Design screenshot not yet provided. Defer until screenshot is shared.
 - [x] `<ProjectGallery>`
 - [x] Assemble `src/app/works/[slug]/page.tsx`
 
-**Phase 6 — Contact page**
-- [ ] `<ContactHero>`
-- [ ] Wire up form to `/api/send-email`
-- [ ] Assemble `src/app/contact/page.tsx`
+**Phase 6 — Contact page** ✅ COMPLETE
+- [x] `<ContactHero>`
+- [x] Wire up form to `/api/send-email`
+- [x] Assemble `src/app/contact/page.tsx`
 
 **All designs confirmed.** No deferred pages.
 

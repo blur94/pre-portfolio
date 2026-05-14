@@ -3,7 +3,6 @@
 import { FormEvent, useState } from "react";
 import { Send } from "lucide-react";
 
-import AnimatedContent from "@/components/AnimatedContent";
 import Magnet from "@/components/Magnet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,8 +73,7 @@ export function ContactForm() {
   };
 
   return (
-    <AnimatedContent distance={40} duration={0.8} delay={0.4}>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
             <Label
@@ -168,7 +166,6 @@ export function ContactForm() {
             {status}
           </p>
         ) : null}
-      </form>
-    </AnimatedContent>
+    </form>
   );
 }
