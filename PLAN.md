@@ -19,12 +19,12 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 ## Open Section
 
-### Current Task: Implementation
+### Current Task: None
 
-**Status:** Phase 6 complete. Core portfolio pages are implemented.
+**Status:** Core portfolio pages are implemented. No active implementation task is in progress.
 
 **Pages:** 5 total (Home, Works, Works > View, Contact, About Me)
-**Design reference:** Screenshots provided. About Me page screenshot not yet shared.
+**Design reference:** Screenshots provided. Use `DESIGN.md` for exact tokens and `STYLE.md` for compact style guidance.
 
 ---
 
@@ -92,11 +92,6 @@ Keep this lean. Remove completed work. Focus on active execution only.
 | Hero | `<ContactHero>` | "Hi there, **Let's Talk**" — italic Instrument Serif "Hi there," + bold Visby CF "Let's Talk" |
 | Form | existing | Name · Email · Message · "Send Message" — wire up to existing API route |
 
-### About Me Page (`src/app/about/page.tsx`)
-Design screenshot not yet provided. Defer until screenshot is shared.
-
----
-
 ## Build Order
 
 **Phase 1 — Shared components** ✅ COMPLETE
@@ -149,7 +144,6 @@ Design screenshot not yet provided. Defer until screenshot is shared.
 
 ## Parking Lot
 
-- About Me page — screenshot not yet provided
 - PWA manifest and icons (already added per git history)
 - SEO metadata per page
 - OGL / WebGL Aurora background — decide placement on Home hero

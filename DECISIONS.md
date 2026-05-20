@@ -71,6 +71,15 @@ Only durable decisions belong here. Always record _why_ — not just what.
 
 ---
 
+### Style Guide: STYLE.md as Daily Reference
+
+**Date:** 2026-05-20
+**Decision:** Add `STYLE.md` as a compact style and implementation-pattern reference derived from the current repo.
+**Reason:** `DESIGN.md` contains exact Figma tokens, while future implementation work benefits from a shorter guide that captures product feel, stack boundaries, typography roles, color usage, component conventions, and agent workflow.
+**Implications:** `DESIGN.md` remains the source of truth for exact visual tokens. `STYLE.md` should summarize, not replace, those decisions and must be updated when durable style guidance changes.
+
+---
+
 ### Component Co-location Strategy
 
 **Date:** 2025-05-14

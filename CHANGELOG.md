@@ -8,6 +8,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 
 ### Added
+- `STYLE.md` with a compact visual identity and implementation-pattern guide derived from the current repo
 - Phase 6 Contact page: `ContactHero`, immediate-rendering `ContactForm`, and `/api/send-email` wiring
 - ReactBits-inspired GridMotion treatment for the app error and not-found pages, with portfolio-specific copy and navigation actions
 - Phase 5 Works detail page: typed project detail data, static params, project hero, screenshot, content sections, code block, gallery, and `/works/[slug]` assembly
@@ -33,6 +34,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `DESIGN.md` with full Figma token extraction (colors, typography, spacing, border-radius, icons)
 
 ### Changed
+- Updated `AGENTS.md` startup guidance to include `STYLE.md` and the full implemented page set
 - Removed vertical overflow from the contact page by fitting it to the layout's remaining viewport height
 - Centered the contact form within the contact page content column while keeping the submit action left-aligned
 - Improved light-mode contrast and focus styling for the hamburger menu sheet
