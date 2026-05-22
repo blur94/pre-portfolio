@@ -1,3 +1,7 @@
+"use client";
+
+import AnimatedContent from "@/components/AnimatedContent";
+
 const experiences = [
   {
     company: "Freelance",
@@ -24,48 +28,52 @@ const experiences = [
 
 export function ExperienceCard() {
   return (
-    <div className="flex flex-col gap-8 rounded-2xl p-6 md:p-8" style={{ backgroundColor: "var(--bg-surface-alt, var(--card))" }}>
-      <h2
-        className="text-2xl font-semibold"
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        Experience
-      </h2>
+    <AnimatedContent distance={50}>
+      <div className="flex flex-col gap-8 rounded-2xl p-6 md:p-8" style={{ backgroundColor: "var(--bg-surface-alt, var(--card))" }}>
+        <h2
+          className="text-2xl font-semibold"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          Experience
+        </h2>
 
-      <div className="flex flex-col divide-y divide-border/40">
-        {experiences.map((exp) => (
-          <div key={exp.company} className="flex flex-col gap-3 py-6 first:pt-0 last:pb-0">
-            {/* Company + date */}
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <span
-                className="font-semibold text-foreground"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                {exp.company}
-              </span>
-              <span
-                className="rounded-full border border-border/60 px-3 py-0.5 text-xs font-medium text-muted-foreground"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                {exp.period}
-              </span>
-            </div>
+        <div className="flex flex-col divide-y divide-border/40">
+          {experiences.map((exp, i) => (
+            <AnimatedContent key={exp.company} distance={20} delay={i * 0.12}>
+              <div className="flex flex-col gap-3 py-6 first:pt-0 last:pb-0">
+                {/* Company + date */}
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span
+                    className="font-semibold text-foreground"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {exp.company}
+                  </span>
+                  <span
+                    className="rounded-full border border-border/60 px-3 py-0.5 text-xs font-medium text-muted-foreground"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {exp.period}
+                  </span>
+                </div>
 
-            {/* Role */}
-            <p
-              className="text-sm font-medium text-primary"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              {exp.role}
-            </p>
+                {/* Role */}
+                <p
+                  className="text-sm font-medium text-primary"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {exp.role}
+                </p>
 
-            {/* Description */}
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {exp.description}
-            </p>
-          </div>
-        ))}
+                {/* Description */}
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {exp.description}
+                </p>
+              </div>
+            </AnimatedContent>
+          ))}
+        </div>
       </div>
-    </div>
+    </AnimatedContent>
   );
 }

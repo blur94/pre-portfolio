@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { Send } from "lucide-react";
 
+import AnimatedContent from "@/components/AnimatedContent";
 import Magnet from "@/components/Magnet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,91 +79,97 @@ export function ContactForm() {
       className="mx-auto flex w-full max-w-xl flex-col gap-5"
       noValidate
     >
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div className="flex flex-col gap-2">
-            <Label
-              htmlFor="name"
-              className="text-xs uppercase text-muted-foreground"
-            >
-              Full Name
-            </Label>
-            <Input
-              id="name"
-              name="name"
-              autoComplete="name"
-              placeholder="Your name"
-              value={details.name}
-              onChange={(event) => handleChange("name", event.target.value)}
-              aria-invalid={Boolean(errors.name)}
-              className="border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50"
-            />
-            {errors.name ? (
-              <p className="text-xs text-destructive">{errors.name}</p>
-            ) : null}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label
-              htmlFor="email"
-              className="text-xs uppercase text-muted-foreground"
-            >
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              placeholder="you@example.com"
-              value={details.email}
-              onChange={(event) => handleChange("email", event.target.value)}
-              aria-invalid={Boolean(errors.email)}
-              className="border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50"
-            />
-            {errors.email ? (
-              <p className="text-xs text-destructive">{errors.email}</p>
-            ) : null}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <Label
-            htmlFor="message"
-            className="text-xs uppercase text-muted-foreground"
-          >
-            Message
-          </Label>
-          <Textarea
-            id="message"
-            name="message"
-            placeholder="Tell me about your project..."
-            value={details.message}
-            onChange={(event) => handleChange("message", event.target.value)}
-            aria-invalid={Boolean(errors.message)}
-            className="min-h-28 resize-none border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50 md:min-h-32"
-          />
-          {errors.message ? (
-            <p className="text-xs text-destructive">{errors.message}</p>
-          ) : null}
-        </div>
-
-        <div className="flex justify-start">
-          <Magnet padding={50} magnetStrength={3}>
-            <Button
-              type="submit"
-              size="lg"
-              className="group w-full gap-2 px-8 font-medium sm:w-auto"
-              disabled={submitting}
-            >
-              {submitting ? "Sending..." : "Send message"}
-              <Send
-                data-icon="inline-end"
-                aria-hidden="true"
-                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        <AnimatedContent distance={30} duration={0.6} delay={0.1}>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="flex flex-col gap-2">
+              <Label
+                htmlFor="name"
+                className="text-xs uppercase text-muted-foreground"
+              >
+                Full Name
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                autoComplete="name"
+                placeholder="Your name"
+                value={details.name}
+                onChange={(event) => handleChange("name", event.target.value)}
+                aria-invalid={Boolean(errors.name)}
+                className="border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50"
               />
-            </Button>
-          </Magnet>
-        </div>
+              {errors.name ? (
+                <p className="text-xs text-destructive">{errors.name}</p>
+              ) : null}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label
+                htmlFor="email"
+                className="text-xs uppercase text-muted-foreground"
+              >
+                Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                value={details.email}
+                onChange={(event) => handleChange("email", event.target.value)}
+                aria-invalid={Boolean(errors.email)}
+                className="border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50"
+              />
+              {errors.email ? (
+                <p className="text-xs text-destructive">{errors.email}</p>
+              ) : null}
+            </div>
+          </div>
+        </AnimatedContent>
+
+        <AnimatedContent distance={30} duration={0.6} delay={0.2}>
+          <div className="flex flex-col gap-2">
+            <Label
+              htmlFor="message"
+              className="text-xs uppercase text-muted-foreground"
+            >
+              Message
+            </Label>
+            <Textarea
+              id="message"
+              name="message"
+              placeholder="Tell me about your project..."
+              value={details.message}
+              onChange={(event) => handleChange("message", event.target.value)}
+              aria-invalid={Boolean(errors.message)}
+              className="min-h-28 resize-none border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50 md:min-h-32"
+            />
+            {errors.message ? (
+              <p className="text-xs text-destructive">{errors.message}</p>
+            ) : null}
+          </div>
+        </AnimatedContent>
+
+        <AnimatedContent distance={20} delay={0.4}>
+          <div className="flex justify-start">
+            <Magnet padding={50} magnetStrength={3}>
+              <Button
+                type="submit"
+                size="lg"
+                className="group w-full gap-2 px-8 font-medium sm:w-auto"
+                disabled={submitting}
+              >
+                {submitting ? "Sending..." : "Send message"}
+                <Send
+                  data-icon="inline-end"
+                  aria-hidden="true"
+                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </Button>
+            </Magnet>
+          </div>
+        </AnimatedContent>
 
         {status ? (
           <p

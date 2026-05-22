@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
+
+import AnimatedContent from "@/components/AnimatedContent";
 
 interface ProjectGalleryProps {
   images?: string[];
   title: string;
 }
+
+const GALLERY_DELAYS = [0, 0.1, 0.2] as const;
 
 export function ProjectGallery({ images, title }: ProjectGalleryProps) {
   const slots = images && images.length > 0 ? images : [null, null, null];
@@ -19,29 +25,28 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {slots.map((src, i) => (
-            <div
-              key={i}
-              className="relative aspect-video overflow-hidden rounded-xl bg-zinc-900/60"
-            >
-              {src ? (
-                <Image
-                  src={src}
-                  alt={`${title} screenshot ${i + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                />
-              ) : (
-                <div className="flex h-full items-end p-3">
-                  <span
-                    className="text-xs text-muted-foreground/30"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    screenshot {i + 1}
-                  </span>
-                </div>
-              )}
-            </div>
+            <AnimatedContent key={i} distance={40} duration={0.6} delay={GALLERY_DELAYS[i] ?? 0}>
+              <div className="relative aspect-video overflow-hidden rounded-xl bg-zinc-900/60">
+                {src ? (
+                  <Image
+                    src={src}
+                    alt={`${title} screenshot ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                ) : (
+                  <div className="flex h-full items-end p-3">
+                    <span
+                      className="text-xs text-muted-foreground/30"
+                      style={{ fontFamily: "var(--font-heading)" }}
+                    >
+                      screenshot {i + 1}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </AnimatedContent>
           ))}
         </div>
       </div>

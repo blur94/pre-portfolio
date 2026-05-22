@@ -101,7 +101,7 @@ when no existing agent scores adequately for fit against the current task.
 
 | Agent | File | Specialization | Last Used | QA Pass Rate |
 |-------|------|---------------|-----------|-------------|
-| _No agents registered yet. HR populates this table after the first session._ | | | | |
+| ui-stylist | `.claude/agents/ui-stylist.md` | Visual/CSS restyling of React/TSX components using Tailwind + inline style props | 2026-05-22 | 1/1 (100%) |
 
 > New agent definitions are written by HR to `.claude/agents/`, not into this file.
 > HR updates this table after every session with the agent's last-used date and QA pass rate.

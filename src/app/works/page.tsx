@@ -5,7 +5,7 @@ import { CTASection } from "@/components/CTASection";
 import { works } from "@/lib/works";
 
 export const metadata = {
-  title: "Works — Gilead Odo",
+  title: "Works",
   description:
     "A collection of projects I've contributed to — from fintech and legaltech to admin dashboards and SaaS platforms.",
 };

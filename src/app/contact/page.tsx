@@ -5,7 +5,7 @@ import { ContactHero } from "@/components/ContactHero";
 import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact — Gilead Odo",
+  title: "Contact",
   description:
     "Get in touch with Gilead Odo — available for freelance projects, collaborations, and opportunities.",
 };

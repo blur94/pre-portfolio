@@ -7,7 +7,7 @@ import { PictureGallery } from "@/components/PictureGallery";
 import { CTASection } from "@/components/CTASection";
 
 export const metadata = {
-  title: "About — Gilead Odo",
+  title: "About",
   description:
     "Software developer exploring the intersection of design, music, and code. 6+ years of experience building impactful digital products.",
 };

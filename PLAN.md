@@ -19,9 +19,28 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 ## Open Section
 
-### Current Task: None
+### Current Task: Hero visual overhaul — organic photo + less boxy layout
 
-**Status:** Core portfolio pages are implemented. No active implementation task is in progress.
+**Status:** COMPLETE — QA approved
+
+**Engineer request:** The root route hero section looks boxy. Fix the photo area and overall composition so it feels organic and distinctive. User chose "organic blob" photo treatment.
+
+**Phase A — Restyle `HeroSection.tsx`**
+- **Scope:** Single file: `src/components/HeroSection.tsx`
+- **Files affected:** `src/components/HeroSection.tsx` only
+- **Changes required:**
+  1. Replace the plain `rounded-2xl` rectangle photo container with an organic blob shape using multi-value `border-radius` (e.g. `60% 40% 57% 43% / 52% 44% 56% 48%`) — no clip-path, just border-radius so overflow stays correct
+  2. Add a subtle tilt to the photo: `rotate-2` or `rotate-1` Tailwind class
+  3. Add a floating accent label inside/near the photo (e.g. a small pill showing "Available ✦" using `--primary` / `#f2fb7a` background and near-black text, absolutely positioned near the bottom of the photo)
+  4. Make column ratio slightly asymmetric: `md:grid-cols-[5fr_4fr]` (photo column wider)
+  5. Reduce the photo container's rigid aspect-ratio feel — use `aspect-[3/4]` instead of `aspect-4/5`, and allow the blob shape to breathe with `overflow-visible` on the outer wrapper
+  6. Keep all existing animations (SplitText, AnimatedContent) and Aurora background untouched
+- **Acceptance criteria:**
+  - Photo container has organic blob border-radius (multiple values, not a single uniform value)
+  - Photo is visually tilted (slight rotation)
+  - A floating "Available" accent pill is visible near the photo
+  - No regressions: SplitText animation still plays, CTAs still work, Aurora still renders
+  - No TypeScript errors
 
 #### Active Agents
 
@@ -30,7 +49,7 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 | Agent | File | Assigned Scope | Status |
 |-------|------|---------------|--------|
-| _No agents assigned yet._ | | | |
+| ui-stylist | `src/components/HeroSection.tsx` | Phase A — organic blob photo treatment + asymmetric grid + Available pill | approved |
 
 **Status values:** `pending` · `in-progress` · `blocked` · `done`
 

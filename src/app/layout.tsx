@@ -60,7 +60,10 @@ const visbyCF = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gilead Odo — Software Developer",
+  title: {
+    template: "%s | Gilead",
+    default: "Gilead Odo — Software Developer",
+  },
   description:
     "Portfolio of Gilead Odo — software developer exploring the intersection of design, music, and code.",
   openGraph: {

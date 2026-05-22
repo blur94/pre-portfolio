@@ -18,7 +18,10 @@
       "Bash(echo \"exit: $?\")",
       "Bash(\"C:/Users/hp/AppData/Local/ms-playwright/chromium-1208/chrome-win64/chrome.exe\" --headless=new --disable-gpu --screenshot=\"C:/Users/hp/AppData/Local/Temp/home-dark.png\" --window-size=1440,900 --hide-scrollbars --force-dark-mode \"http://localhost:3000\")",
       "Read(//c/Users/hp/AppData/Local/ms-playwright/**)",
-      "Read(//c/Users/hp/AppData/Roaming/npm/node_modules/**)"
+      "Read(//c/Users/hp/AppData/Roaming/npm/node_modules/**)",
+      "Bash(git commit *)",
+      "Bash(/c/Users/hp/.claude/skills/gstack/browse/dist/browse goto *)",
+      "Bash(/c/Users/hp/.claude/skills/gstack/browse/dist/browse screenshot *)"
     ]
   }
 }

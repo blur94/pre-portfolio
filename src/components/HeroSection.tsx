@@ -21,14 +21,34 @@ export function HeroSection() {
       </div>
 
 
-<div className="relative z-10 grid min-h-[90vh] items-center gap-10 px-6 py-16 md:grid-cols-2 md:gap-16 md:px-10 md:py-24">
+<div className="relative z-10 grid min-h-[90vh] items-center gap-10 px-6 py-16 md:grid-cols-[5fr_4fr] md:gap-16 md:px-10 md:py-24">
         {/* Profile photo — left column, desktop only */}
-        <div className="hidden aspect-4/5 w-full overflow-hidden rounded-2xl bg-zinc-900/60 md:block">
-          {/* Swap in: <Image src="/profile.jpg" alt="Gilead Odo" fill className="object-cover" /> */}
-          <div className="flex h-full items-end p-6">
-            <span className="text-xs text-muted-foreground/30">
-              profile photo
-            </span>
+        <div
+          className="relative hidden aspect-[3/4] w-full rotate-2 md:block"
+          style={{ overflow: "visible" }}
+        >
+          {/* Blob-shaped photo container */}
+          <div
+            className="h-full w-full bg-zinc-900/60"
+            style={{
+              borderRadius: "60% 40% 57% 43% / 52% 44% 56% 48%",
+              overflow: "hidden",
+            }}
+          >
+            {/* Swap in: <Image src="/profile.jpg" alt="Gilead Odo" fill className="object-cover" /> */}
+            <div className="flex h-full items-end p-6">
+              <span className="text-xs text-muted-foreground/30">
+                profile photo
+              </span>
+            </div>
+          </div>
+
+          {/* Floating "Available" accent pill */}
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 translate-y-4 whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide shadow-lg"
+            style={{ backgroundColor: "#f2fb7a", color: "#0a0a0a" }}
+          >
+            Available ✦
           </div>
         </div>
 

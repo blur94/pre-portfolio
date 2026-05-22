@@ -36,6 +36,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `DESIGN.md` with full Figma token extraction (colors, typography, spacing, border-radius, icons)
 
 ### Changed
+- `HeroSection`: replaced rectangular photo container with organic blob shape (multi-value `border-radius: 60% 40% 57% 43% / 52% 44% 56% 48%`), added `rotate-2` tilt, asymmetric `md:grid-cols-[5fr_4fr]` column ratio, `aspect-[3/4]` with `overflow-visible`, and a floating lime "Available ✦" accent pill absolutely positioned near the bottom of the photo column
+- Commissioned `ui-stylist` agent (`.claude/agents/ui-stylist.md`) and registered it in `AGENTS.md` Agent Registry (QA pass rate: 1/1)
 - Updated `AGENTS.md` startup guidance to include `STYLE.md` and the full implemented page set
 - Removed vertical overflow from the contact page by fitting it to the layout's remaining viewport height
 - Centered the contact form within the contact page content column while keeping the submit action left-aligned

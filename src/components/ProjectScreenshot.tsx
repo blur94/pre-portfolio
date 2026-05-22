@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 
+import AnimatedContent from "@/components/AnimatedContent";
 import type { Work } from "@/lib/works";
 
 interface ProjectScreenshotProps {
@@ -9,6 +12,7 @@ interface ProjectScreenshotProps {
 export function ProjectScreenshot({ work }: ProjectScreenshotProps) {
   return (
     <div className="px-6 pb-6 md:px-10">
+      <AnimatedContent distance={60} duration={1}>
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/60">
         {work.coverImage ? (
           <Image
@@ -30,6 +34,7 @@ export function ProjectScreenshot({ work }: ProjectScreenshotProps) {
           </div>
         )}
       </div>
+      </AnimatedContent>
     </div>
   );
 }

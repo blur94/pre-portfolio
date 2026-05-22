@@ -21,7 +21,7 @@ export async function generateMetadata({
   const work = works.find((w) => w.slug === slug);
   if (!work) return {};
   return {
-    title: `${work.title} — Gilead Odo`,
+    title: `${work.title}`,
     description: work.description,
   };
 }
@@ -52,7 +52,10 @@ export default async function WorkView({
         <ContentSection heading="My Role">
           <ul className="flex flex-col gap-3">
             {work.roles.map((role) => (
-              <li key={role} className="flex items-start gap-3 text-base text-muted-foreground">
+              <li
+                key={role}
+                className="flex items-start gap-3 text-base text-muted-foreground"
+              >
                 <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
                 {role}
               </li>
@@ -65,7 +68,10 @@ export default async function WorkView({
         <ContentSection heading="Key Features">
           <ul className="flex flex-col gap-3">
             {work.features.map((feature) => (
-              <li key={feature} className="flex items-start gap-3 text-base text-muted-foreground">
+              <li
+                key={feature}
+                className="flex items-start gap-3 text-base text-muted-foreground"
+              >
                 <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
                 {feature}
               </li>

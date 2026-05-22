@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 
+import AnimatedContent from "@/components/AnimatedContent";
 import { LiveBadge } from "@/components/LiveBadge";
 import { Button } from "@/components/ui/button";
 import type { Work } from "@/lib/works";
@@ -22,46 +25,52 @@ export function ProjectHero({ work }: ProjectHeroProps) {
 
       <div className="flex max-w-3xl flex-col gap-6">
         {/* Title + badge */}
-        <div className="flex flex-wrap items-center gap-4">
-          <h1
-            className="text-5xl font-semibold leading-tight tracking-tight md:text-6xl"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            {work.title}
-          </h1>
-          {work.isLive && <LiveBadge />}
-        </div>
+        <AnimatedContent distance={40}>
+          <div className="flex flex-wrap items-center gap-4">
+            <h1
+              className="text-5xl font-semibold leading-tight tracking-tight md:text-6xl"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {work.title}
+            </h1>
+            {work.isLive && <LiveBadge />}
+          </div>
+        </AnimatedContent>
 
         {/* Description */}
-        <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
-          {work.description}
-        </p>
+        <AnimatedContent distance={30} delay={0.15}>
+          <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
+            {work.description}
+          </p>
+        </AnimatedContent>
 
         {/* Links */}
         {(work.liveUrl || work.repoUrl) && (
-          <div className="flex flex-wrap gap-3 pt-1">
-            {work.liveUrl && (
-              <Button
-                render={<a href={work.liveUrl} target="_blank" rel="noopener noreferrer" />}
-                nativeButton={false}
-                size="lg"
-                className="rounded-full px-8"
-              >
-                Live Preview ↗
-              </Button>
-            )}
-            {work.repoUrl && (
-              <Button
-                render={<a href={work.repoUrl} target="_blank" rel="noopener noreferrer" />}
-                nativeButton={false}
-                variant="outline"
-                size="lg"
-                className="rounded-full px-8"
-              >
-                View Repository ↗
-              </Button>
-            )}
-          </div>
+          <AnimatedContent distance={20} delay={0.3}>
+            <div className="flex flex-wrap gap-3 pt-1">
+              {work.liveUrl && (
+                <Button
+                  render={<a href={work.liveUrl} target="_blank" rel="noopener noreferrer" />}
+                  nativeButton={false}
+                  size="lg"
+                  className="rounded-full px-8"
+                >
+                  Live Preview ↗
+                </Button>
+              )}
+              {work.repoUrl && (
+                <Button
+                  render={<a href={work.repoUrl} target="_blank" rel="noopener noreferrer" />}
+                  nativeButton={false}
+                  variant="outline"
+                  size="lg"
+                  className="rounded-full px-8"
+                >
+                  View Repository ↗
+                </Button>
+              )}
+            </div>
+          </AnimatedContent>
         )}
       </div>
     </section>
