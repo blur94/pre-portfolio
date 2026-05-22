@@ -69,7 +69,7 @@ export function HeroSection() {
                 render={<Link href="/works" />}
                 nativeButton={false}
                 size="lg"
-                className="rounded-full px-8"
+                className="h-11 rounded-full px-8"
               >
                 See my works
               </Button>
@@ -78,7 +78,7 @@ export function HeroSection() {
                 nativeButton={false}
                 variant="outline"
                 size="lg"
-                className="rounded-full px-8"
+                className="h-11 rounded-full px-8"
               >
                 Download my CV
               </Button>

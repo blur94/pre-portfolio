@@ -64,7 +64,7 @@ function LogoContent({
 export function Logo({ className, iconClassName, asLink = false }: LogoProps) {
   if (asLink) {
     return (
-      <Link href="/" aria-label="Gilead Odo — home">
+      <Link href="/" aria-label="Gilead Odo — home" className="flex min-h-[44px] items-center">
         <LogoContent className={className} iconClassName={iconClassName} />
       </Link>
     );

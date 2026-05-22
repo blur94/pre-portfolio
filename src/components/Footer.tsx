@@ -63,11 +63,11 @@ export function Footer() {
 
         {/* Contact info */}
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <a href="tel:+2348123456789" className="transition-colors hover:text-foreground">
+          <a href="tel:+2348123456789" className="flex min-h-[44px] items-center transition-colors hover:text-foreground">
             +234 (812) 345 6789
           </a>
           <span className="text-border">·</span>
-          <a href="mailto:gilead.odo@gmail.com" className="transition-colors hover:text-foreground">
+          <a href="mailto:gilead.odo@gmail.com" className="flex min-h-[44px] items-center transition-colors hover:text-foreground">
             gilead.odo@gmail.com
           </a>
         </div>
