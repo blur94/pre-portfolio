@@ -7,7 +7,18 @@
       "mcp__plugin_playwright_playwright__browser_press_key",
       "mcp__plugin_playwright_playwright__browser_resize",
       "Bash(git checkout *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Skill(design-system:frontend-audit)",
+      "Skill(design-system:frontend-audit:*)",
+      "Skill(product-strategy:ai-product-positioning)",
+      "Skill(product-strategy:ai-product-positioning:*)",
+      "Bash(pnpm dlx *)",
+      "Skill(design-review)",
+      "Bash(\"C:/Users/hp/AppData/Local/ms-playwright/chromium-1208/chrome-win64/chrome.exe\" --headless=new --disable-gpu --screenshot=\"C:/Users/hp/AppData/Local/Temp/home.png\" --window-size=1440,900 --hide-scrollbars \"http://localhost:3000\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(\"C:/Users/hp/AppData/Local/ms-playwright/chromium-1208/chrome-win64/chrome.exe\" --headless=new --disable-gpu --screenshot=\"C:/Users/hp/AppData/Local/Temp/home-dark.png\" --window-size=1440,900 --hide-scrollbars --force-dark-mode \"http://localhost:3000\")",
+      "Read(//c/Users/hp/AppData/Local/ms-playwright/**)",
+      "Read(//c/Users/hp/AppData/Roaming/npm/node_modules/**)"
     ]
   }
 }

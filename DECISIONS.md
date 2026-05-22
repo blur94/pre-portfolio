@@ -148,6 +148,34 @@ Only durable decisions belong here. Always record _why_ — not just what.
 
 ---
 
+---
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MULTI-AGENT ORG UPGRADE
+     Frozen routing rules for the multi-agent org. HR must apply them
+     as stated and must not override them without an explicit engineer instruction.
+     ═══════════════════════════════════════════════════════════════ -->
+
+## Agent Routing Decisions
+
+### Default Routing Pattern — Parallel Sub-Agents
+
+**Date:** 2026-05-22
+**Decision:** Default to parallel sub-agents for all task phases where data shapes are pre-defined before work begins.
+**Reason:** Sub-agents are cheaper, simpler, and sufficient when contracts between layers are already known. There is no coordination overhead and each agent can proceed independently.
+**Implications:** HR must not escalate to Agent Teams unless the escalation trigger below is explicitly met. Defaulting to Agent Teams when sub-agents would suffice is a routing error.
+
+---
+
+### Escalation Trigger — Agent Teams
+
+**Date:** 2026-05-22
+**Decision:** Escalate to Agent Teams when a new API route, its consuming query hook, and its UI component are being defined in the same task and must negotiate a shared TypeScript interface before either layer can proceed.
+**Reason:** Sub-agents cannot coordinate contracts peer-to-peer. When no response type exists in the codebase yet, independent workers will produce mismatched interfaces that require rework.
+**Implications:** HR detects this condition by checking whether a route response type already exists in the codebase before assigning workers. If the type exists, sub-agents are sufficient. If it does not, Agent Teams are required for the affected phases only — not the entire task.
+
+---
+
 ## Superseded Decisions
 
 ### Email: Nodemailer (superseded)

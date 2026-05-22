@@ -12,9 +12,8 @@ export function CTASection() {
         Have a project in mind?
       </h2>
       <p className="max-w-xs text-sm leading-relaxed text-muted-foreground md:max-w-sm">
-        A professional frontend developer is a skilled specialist responsible
-        for creating the visual and interactive elements of a website or web
-        application.
+        Whether it&apos;s a product, a brand, or just an idea — I&apos;d love to
+        help bring it to life with thoughtful design and solid code.
       </p>
       <Button
         render={<Link href="/contact" />}

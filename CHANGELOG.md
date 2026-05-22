@@ -8,6 +8,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 
 ### Added
+- Multi-agent org system: Agent Registry + Org Protocol in `AGENTS.md`, multi-agent sections in `CLAUDE.md`, Active Agents table in `PLAN.md`, Agent Routing Decisions in `DECISIONS.md`, core agent definitions in `.claude/agents/` (ceo, hr, researcher, qa)
+- Build commands and non-obvious architecture notes added to `CLAUDE.md`
 - `STYLE.md` with a compact visual identity and implementation-pattern guide derived from the current repo
 - Phase 6 Contact page: `ContactHero`, immediate-rendering `ContactForm`, and `/api/send-email` wiring
 - ReactBits-inspired GridMotion treatment for the app error and not-found pages, with portfolio-specific copy and navigation actions

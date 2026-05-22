@@ -82,3 +82,83 @@ At the end of every implementation session, update the following files:
 **In STYLE.md:** compact implementation-facing style guidance derived from `DESIGN.md` and current code
 
 **Not in any file:** temporary debug notes, speculative ideas (use Parking Lot in `PLAN.md` instead)
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MULTI-AGENT ORG UPGRADE
+     The sections below extend this file for use with a self-organizing
+     multi-agent org (CEO → HR → Researcher → Worker → QA).
+     ═══════════════════════════════════════════════════════════════ -->
+
+## Agent Registry
+
+**HR must read this table before employing any agent.**
+**Researcher must check this table before drafting a spec for a new agent.**
+
+If an agent already exists that fits the task, use it. Commission a new one only
+when no existing agent scores adequately for fit against the current task.
+
+| Agent | File | Specialization | Last Used | QA Pass Rate |
+|-------|------|---------------|-----------|-------------|
+| _No agents registered yet. HR populates this table after the first session._ | | | | |
+
+> New agent definitions are written by HR to `.claude/agents/`, not into this file.
+> HR updates this table after every session with the agent's last-used date and QA pass rate.
+
+---
+
+## Agent Org Protocol
+
+This section describes the multi-agent org structure for this repository.
+All agents must read this section at session start before beginning any work.
+
+### Roles and Responsibilities
+
+**CEO**
+- Receives the task from the engineer.
+- Decomposes it into phases and delegates each phase to HR.
+- Synthesizes the final output from QA-approved worker outputs.
+- Never implements directly.
+- Reads: `PLAN.md`, `DECISIONS.md`. Writes: `PLAN.md` (task decomposition).
+
+**HR Agent**
+- Reads the Agent Registry above before making any hiring decision.
+- Consults Researcher to assess which existing agents fit the task and which gaps exist.
+- Employs existing agents or commissions new ones based on Researcher's scoring.
+- Assigns each agent an explicit scope, toolset, and success criteria.
+- Writes new agent definitions to `.claude/agents/` on demand.
+- Updates the Agent Registry (above) after every session.
+- Reads: `AGENTS.md` (registry + protocol), `DECISIONS.md` (routing rules), `PLAN.md`.
+- Writes: `AGENTS.md` (registry), `.claude/agents/` (new agent definitions), `PLAN.md` (active agents section).
+
+**Researcher Agent**
+- Audits the codebase and the Agent Registry before HR makes any hiring decision.
+- Scores existing agents for fit against the current task.
+- If no agent fits, drafts a spec for a new one and hands it to HR.
+- Reads `CHANGELOG.md` to understand patterns already established in this codebase.
+- Reads: `AGENTS.md` (registry), `CHANGELOG.md`, `DECISIONS.md`, relevant codebase files.
+- Writes: agent specs (handed to HR; not committed directly to the registry).
+
+**Worker Agents**
+- Spawned by HR. Definitions live in `.claude/agents/`.
+- Either pre-existing or written on demand by HR based on Researcher's spec.
+- Execute in parallel (sub-agents) or with peer coordination (Agent Teams) per the routing rules in `DECISIONS.md`.
+- Reads: assigned scope from HR, relevant codebase files.
+- Writes: implementation output within their assigned scope only.
+
+**QA Agent**
+- Reviews worker output against the original task spec before CEO synthesizes.
+- Flags rework to HR if output does not meet acceptance criteria.
+- Updates the QA Pass Rate column in the Agent Registry after each review.
+- Only passes work to CEO when all outputs meet acceptance criteria.
+- Reads: original task spec (`PLAN.md`), worker outputs.
+- Writes: `AGENTS.md` (pass rates), `CHANGELOG.md` (completed task summaries at end-of-session).
+
+### Escalation Path
+
+1. HR assigns workers as parallel sub-agents (default).
+2. If the escalation trigger is met (see `DECISIONS.md` → Agent Routing Decisions), HR switches to Agent Teams for the affected phases.
+3. QA reviews all worker outputs before passing to CEO.
+4. CEO synthesizes and delivers to the engineer.
+5. HR updates the Agent Registry. QA writes the session summary to `CHANGELOG.md`.

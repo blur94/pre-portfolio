@@ -23,6 +23,17 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 **Status:** Core portfolio pages are implemented. No active implementation task is in progress.
 
+#### Active Agents
+
+<!-- HR writes to this section when agents are assigned to the current task.      -->
+<!-- QA clears this section when the task is complete and all outputs are approved. -->
+
+| Agent | File | Assigned Scope | Status |
+|-------|------|---------------|--------|
+| _No agents assigned yet._ | | | |
+
+**Status values:** `pending` · `in-progress` · `blocked` · `done`
+
 **Pages:** 5 total (Home, Works, Works > View, Contact, About Me)
 **Design reference:** Screenshots provided. Use `DESIGN.md` for exact tokens and `STYLE.md` for compact style guidance.
 

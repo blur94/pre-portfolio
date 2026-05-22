@@ -67,6 +67,27 @@ After completing implementation work:
 
 ---
 
+## Commands
+
+```bash
+pnpm dev      # Start dev server at localhost:3000
+pnpm build    # Production build
+pnpm lint     # ESLint check
+pnpm start    # Run production build locally (requires pnpm build first)
+```
+
+---
+
+## Key Architecture Notes
+
+- **Tailwind CSS v4** — configured via `@import "tailwindcss"` in `globals.css`, no `tailwind.config.js`. Theme tokens live in `@theme inline {}`.
+- **shadcn backed by `@base-ui/react`** (not Radix UI). Use `render={<Link href="..." />}` + `nativeButton={false}` for link-buttons; `asChild` is banned.
+- **Font CSS variables** — `--font-display` (Instrument Serif italic), `--font-heading` (Visby CF), `--font-body` (Inter). All wired in `src/app/layout.tsx`.
+- **Project data** — all works content lives in `src/lib/works.ts` as a typed static array; `works/[slug]/page.tsx` uses `generateStaticParams`.
+- **Contact email** — `src/app/api/send-email/route.ts` via Resend. Requires `RESEND_API_KEY` env var.
+
+---
+
 ## Skill Routing
 
 When the user's request matches an available skill, invoke it via the Skill tool.
@@ -89,3 +110,37 @@ Key routing rules:
 - Do not record temporary debug work in `DECISIONS.md`
 - Do not skip the startup sequence even for "small" tasks
 - Do not use `any` type in TypeScript without a comment explaining why
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MULTI-AGENT ORG UPGRADE
+     ═══════════════════════════════════════════════════════════════ -->
+
+## Multi-Agent Startup Sequence
+
+When this session is part of a multi-agent org (CEO, HR, Researcher, Worker, or QA),
+extend the standard startup sequence above with these additional steps — in order,
+before doing any work:
+
+1. Read `AGENTS.md` → **Agent Org Protocol** to understand the org structure and your role's responsibilities.
+2. Read `AGENTS.md` → **Agent Registry** to know which agents exist, their specializations, and their QA pass rates.
+3. Read `DECISIONS.md` → **Agent Routing Decisions** to understand which routing pattern applies to the current task.
+4. Read `PLAN.md` → **Current Task** and **Active Agents** to understand what is being built and which agents are already assigned.
+5. Determine your role for this session: CEO, HR, Researcher, a named Worker (check `.claude/agents/` for your definition), or QA.
+6. Only after completing steps 1–5, begin work in that role.
+
+Do not skip this sequence even for tasks that appear simple. Role clarity prevents duplicated work and conflicting outputs.
+
+---
+
+## End-of-Session Multi-Agent Checklist
+
+After completing work in a multi-agent session, all agents must complete the following
+before terminating the session:
+
+- [ ] **Agent Registry** (`AGENTS.md`): HR updates the Last Used date for all employed agents. QA updates QA Pass Rates.
+- [ ] **Changelog** (`CHANGELOG.md`): QA writes a completed task summary under `## Unreleased`. Engineers may also write here.
+- [ ] **Plan** (`PLAN.md`): HR or CEO updates task status. Mark completed phases as done. QA clears the Active Agents section when the full task is complete.
+- [ ] **Decisions** (`DECISIONS.md`): Any agent that encountered a new routing or architectural decision records it here, using the existing entry format (Decision, Reason, Implications).
+- [ ] Confirm that all repo memory files are consistent with each other before ending the session.

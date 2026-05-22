@@ -24,7 +24,7 @@ const experiences = [
 
 export function ExperienceCard() {
   return (
-    <div className="flex flex-col gap-8 rounded-2xl bg-card p-6 md:p-8">
+    <div className="flex flex-col gap-8 rounded-2xl p-6 md:p-8" style={{ backgroundColor: "var(--bg-surface-alt, var(--card))" }}>
       <h2
         className="text-2xl font-semibold"
         style={{ fontFamily: "var(--font-heading)" }}
