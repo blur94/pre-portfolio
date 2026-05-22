@@ -143,7 +143,7 @@ All agents must read this section at session start before beginning any work.
 - Writes: agent specs (handed to HR; not committed directly to the registry).
 
 **Worker Agents**
-- Spawned by HR. Definitions live in `.claude/agents/`.
+- Spawned by HR. In Claude Code, definitions live in `.claude/agents/` (or `~/.claude/agents/` for org agents).
 - Either pre-existing or written on demand by HR based on Researcher's spec.
 - Execute in parallel (sub-agents) or with peer coordination (Agent Teams) per the routing rules in `DECISIONS.md`.
 - Reads: assigned scope from HR, relevant codebase files.
@@ -156,6 +156,27 @@ All agents must read this section at session start before beginning any work.
 - Only passes work to CEO when all outputs meet acceptance criteria.
 - Reads: original task spec (`PLAN.md`), worker outputs.
 - Writes: `AGENTS.md` (pass rates), `CHANGELOG.md` (completed task summaries at end-of-session).
+
+### Tool Portability
+
+The **workflow pattern** (CEO → HR → parallel workers → QA) is portable to any AI runtime
+that exposes delegation or subagent primitives. The **file layout** is not — each tool has
+its own convention for where agent definitions live:
+
+| Tool | Subagent capability | Agent definition location |
+|------|---------------------|--------------------------|
+| Claude Code | `Agent` tool — isolated context, configurable tools, returns to parent | `~/.claude/agents/` (global) · `.claude/agents/` (per-project) |
+| GitHub Copilot (VS Code) | `runSubagent` / `agent` tool path, parallel orchestration | Copilot extension agent API |
+| Codex | `spawn_agent`, `send_input`, `wait_agent`, `close_agent` primitives | Runtime-specific; varies by Codex client |
+
+When adapting this org chain to a non-Claude Code runtime: map each role (CEO, HR,
+Researcher, Worker, QA) to that runtime's subagent invocation mechanism, and translate
+agent definitions to the tool's native format. The `PLAN.md` / `AGENTS.md` / `DECISIONS.md`
+repo files remain the shared memory layer regardless of which tool is orchestrating.
+
+> **Do not treat any tool's subagent feature set as frozen.** Copilot, Codex, and other
+> tools are evolving quickly. Verify current capabilities against each tool's own docs
+> before assuming a feature is absent.
 
 ### Escalation Path
 

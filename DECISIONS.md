@@ -164,6 +164,7 @@ Only durable decisions belong here. Always record _why_ — not just what.
 **Decision:** The four org agents (CEO, HR, Researcher, QA) live at `~/.claude/agents/` (global, available in every project). Specialist agents (e.g. `ui-stylist`) live at `.claude/agents/` (per-project, tuned to this codebase).
 **Reason:** Org agents are a pure workflow pattern with no project-specific knowledge — they only read repo memory files (`PLAN.md`, `AGENTS.md`, etc.) that are always project-scoped. Maintaining one copy globally means a single improvement benefits all projects. Specialist agents reference project-specific files (`DESIGN.md`, `STYLE.md`, animation hook names) and must be tuned per codebase.
 **Implications:** When starting a new project that uses this multi-agent org, create only the specialist agents in `.claude/agents/`. The CEO → HR → Researcher → QA chain is already available globally. The `AGENTS.md` Agent Registry in each project lists only specialist agents.
+**Portability note:** `.claude/agents/` is Claude Code-specific. The **workflow pattern** (CEO → HR → parallel workers → QA) is portable — Copilot (VS Code) and Codex both have subagent/delegation primitives as of mid-2026. Adapting to another tool means mapping the role definitions to that tool's native agent format; the repo memory files (`PLAN.md`, `DECISIONS.md`, etc.) remain the shared state layer unchanged. Do not treat any tool's subagent feature set as a fixed constraint — verify against current docs.
 
 ---
 
