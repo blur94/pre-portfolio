@@ -51,7 +51,7 @@ export function Nav() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="size-8 text-muted-foreground hover:text-foreground"
+                className="size-11 text-muted-foreground hover:text-foreground"
               />
             }
           >
