@@ -37,7 +37,7 @@ export function Nav() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="flex min-h-[44px] items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
             </a>
