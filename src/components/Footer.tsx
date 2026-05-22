@@ -54,7 +54,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={link.label}
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="flex size-11 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.icon}
             </a>
