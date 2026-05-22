@@ -10,7 +10,7 @@ export function CTASection() {
     <section className="flex flex-col items-center gap-5 px-6 py-20 text-center md:py-28">
       <AnimatedContent distance={50}>
         <h2
-          className="max-w-sm text-4xl leading-snug md:max-w-md md:text-5xl"
+          className="max-w-sm text-4xl leading-snug md:max-w-md md:text-5xl [text-wrap:balance]"
           style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
         >
           Have a project in mind?
