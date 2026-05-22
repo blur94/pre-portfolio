@@ -75,7 +75,7 @@ export function Footer() {
         {/* Credits */}
         <div className="flex w-full flex-col items-center justify-between gap-2 border-t border-border/40 pt-6 text-xs text-muted-foreground/60 sm:flex-row">
           <span>Designed with ♥ &amp; Coffee</span>
-          <span>© Gilead Odo 2025 All rights reserved</span>
+          <span>© Gilead Odo 2026 All rights reserved</span>
         </div>
       </div>
     </footer>
