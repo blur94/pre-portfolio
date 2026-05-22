@@ -103,7 +103,9 @@ when no existing agent scores adequately for fit against the current task.
 |-------|------|---------------|-----------|-------------|
 | ui-stylist | `.claude/agents/ui-stylist.md` | Visual/CSS restyling of React/TSX components using Tailwind + inline style props | 2026-05-22 | 1/1 (100%) |
 
-> New agent definitions are written by HR to `.claude/agents/`, not into this file.
+> **Org agents** (CEO, HR, Researcher, QA) live globally at `~/.claude/agents/` and are available in every project.
+> **Specialist agents** (e.g. ui-stylist) live per-project at `.claude/agents/` and are tuned to this codebase.
+> New specialist agent definitions are written by HR to `.claude/agents/`, not into this file.
 > HR updates this table after every session with the agent's last-used date and QA pass rate.
 
 ---

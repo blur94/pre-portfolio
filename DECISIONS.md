@@ -156,6 +156,17 @@ Only durable decisions belong here. Always record _why_ — not just what.
      as stated and must not override them without an explicit engineer instruction.
      ═══════════════════════════════════════════════════════════════ -->
 
+## Agent Location Convention
+
+### Org Agents Live Globally; Specialist Agents Live Per-Project
+
+**Date:** 2026-05-22
+**Decision:** The four org agents (CEO, HR, Researcher, QA) live at `~/.claude/agents/` (global, available in every project). Specialist agents (e.g. `ui-stylist`) live at `.claude/agents/` (per-project, tuned to this codebase).
+**Reason:** Org agents are a pure workflow pattern with no project-specific knowledge — they only read repo memory files (`PLAN.md`, `AGENTS.md`, etc.) that are always project-scoped. Maintaining one copy globally means a single improvement benefits all projects. Specialist agents reference project-specific files (`DESIGN.md`, `STYLE.md`, animation hook names) and must be tuned per codebase.
+**Implications:** When starting a new project that uses this multi-agent org, create only the specialist agents in `.claude/agents/`. The CEO → HR → Researcher → QA chain is already available globally. The `AGENTS.md` Agent Registry in each project lists only specialist agents.
+
+---
+
 ## Agent Routing Decisions
 
 ### Default Routing Pattern — Parallel Sub-Agents
