@@ -37,7 +37,7 @@ export function ArticlesSection() {
       <div className="mb-10 flex items-center justify-between">
         <AnimatedContent distance={30}>
           <h2
-            className="text-2xl font-semibold"
+            className="text-3xl font-semibold"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             Recent Articles
