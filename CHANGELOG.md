@@ -8,6 +8,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 
 ### Added
+- React Bits CountUp treatment for the About stats row while preserving the existing `6+`, projects, and tech-stack displays
 - Multi-agent org system: Agent Registry + Org Protocol in `AGENTS.md`, multi-agent sections in `CLAUDE.md`, Active Agents table in `PLAN.md`, Agent Routing Decisions in `DECISIONS.md`, core agent definitions in `.claude/agents/` (ceo, hr, researcher, qa)
 - Build commands and non-obvious architecture notes added to `CLAUDE.md`
 - `STYLE.md` with a compact visual identity and implementation-pattern guide derived from the current repo
@@ -36,6 +37,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `DESIGN.md` with full Figma token extraction (colors, typography, spacing, border-radius, icons)
 
 ### Changed
+- Migrated the Next.js 16 lint command to the ESLint CLI and cleared blocking lint errors in existing animation components required by the About stats QA gate
 - `HeroSection`: replaced rectangular photo container with organic blob shape (multi-value `border-radius: 60% 40% 57% 43% / 52% 44% 56% 48%`), added `rotate-2` tilt, asymmetric `md:grid-cols-[5fr_4fr]` column ratio, `aspect-[3/4]` with `overflow-visible`, and a floating lime "Available ✦" accent pill absolutely positioned near the bottom of the photo column
 - Commissioned `ui-stylist` agent (`.claude/agents/ui-stylist.md`) and registered it in `AGENTS.md` Agent Registry (QA pass rate: 1/1)
 - Updated `AGENTS.md` startup guidance to include `STYLE.md` and the full implemented page set
@@ -50,6 +52,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Moved `pnpm onlyBuiltDependencies` config from `pnpm-workspace.yaml` to `package.json`
 
 ### QA
+- Approved the About stats CountUp session after React Bits registry integration by `registry-component-integrator`, lint CLI migration by `next-lint-migrator`, and animation lint rework by `animation-lint-reworker`.
+- Rework cycle: the initial CountUp review failed on duplicate registry output and a broken Next 16 lint gate before the final QA pass.
 - Reviewed Phase A React Bits CountUp registry add by `registry-component-integrator`; rework is required because the registry fetch failed before generated CountUp source was added.
 - Reviewed Phase B About stats integration by `registry-component-integrator`; rework is required because no CountUp API was available and `StatsRow` remains static.
 
