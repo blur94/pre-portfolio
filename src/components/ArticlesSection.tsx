@@ -1,3 +1,6 @@
+"use client";
+
+import AnimatedContent from "@/components/AnimatedContent";
 import { ArticleCard, type Article } from "@/components/ArticleCard";
 
 const articles: Article[] = [
@@ -32,15 +35,17 @@ export function ArticlesSection() {
     <section className="px-6 py-16 md:px-10 md:py-20">
       {/* Header */}
       <div className="mb-10 flex items-center justify-between">
-        <h2
-          className="text-2xl font-semibold"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          Recent Articles
-        </h2>
+        <AnimatedContent distance={30}>
+          <h2
+            className="text-2xl font-semibold"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Recent Articles
+          </h2>
+        </AnimatedContent>
         <a
           href="#"
-          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="flex min-h-[44px] items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           All Articles →
@@ -49,8 +54,8 @@ export function ArticlesSection() {
 
       {/* Grid */}
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {articles.map((article) => (
-          <ArticleCard key={article.slug} article={article} />
+        {articles.map((article, i) => (
+          <ArticleCard key={article.slug} article={article} delay={i * 0.1} />
         ))}
       </div>
     </section>
