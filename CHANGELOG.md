@@ -49,6 +49,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Migrated email sending from Nodemailer to Resend
 - Moved `pnpm onlyBuiltDependencies` config from `pnpm-workspace.yaml` to `package.json`
 
+### QA
+- Reviewed Phase A React Bits CountUp registry add by `registry-component-integrator`; rework is required because the registry fetch failed before generated CountUp source was added.
+- Reviewed Phase B About stats integration by `registry-component-integrator`; rework is required because no CountUp API was available and `StatsRow` remains static.
+
 ---
 
 ## [0.1.0] - 2025-05

@@ -38,4 +38,7 @@ sendgrid.env
 
 # playwright browser automation artifacts
 .playwright-mcp/
+.playwright-cli/
 .gstack/
+output/playwright/
+research/screenshots/

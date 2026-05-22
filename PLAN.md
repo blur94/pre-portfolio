@@ -19,6 +19,53 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 ## Open Section
 
+### Current Task: About stats CountUp with React Bits
+
+**Status:** DELEGATED TO HR
+
+**Engineer request:** "@ceo the stats session on /about page shoul be able to count down. Use a component from ReactBits.dev to ensure this. They're already in my shadcn registry"
+
+**Clarification:** The engineer approved count up behavior instead of count down.
+
+**Approved references:**
+- Design spec: `docs/superpowers/specs/2026-05-22-about-stats-count-up-design.md`
+- Implementation plan: `docs/superpowers/plans/2026-05-22-about-stats-count-up.md`
+
+**Phase A - Add React Bits CountUp**
+- **Scope:** Resolve the configured React Bits shadcn registry item for CountUp, add the owned component source and any required dependency changes, and inspect the generated API before integration.
+- **Files affected:** registry-generated CountUp component path, `package.json` and `pnpm-lock.yaml` only if the registry add changes dependencies.
+- **Acceptance criteria:**
+  - CountUp comes from the configured React Bits shadcn registry rather than a custom counter.
+  - The generated component source is owned in the repo and its API is understood before `StatsRow` is edited.
+  - Any dependency changes are limited to what the registry component requires.
+
+**Phase B - Integrate About stats**
+- **Scope:** Wire CountUp into the existing `StatsRow` number treatment with numeric targets and optional suffix data while preserving the current About stats layout and reveal behavior.
+- **Files affected:** `src/components/StatsRow.tsx`.
+- **Acceptance criteria:**
+  - `/about` stats count upward to `6+`, `12`, and `8`.
+  - The years-of-experience `+` suffix remains visible.
+  - Existing three-column structure, dividers, labels, typography treatment, and `AnimatedContent` reveal remain intact.
+  - Lint and production build checks pass for the integration.
+
+**Phase C - QA and repo memory**
+- **Scope:** Verify the implemented stats behavior against the approved spec and update repository session memory after approved completion.
+- **Files affected:** `PLAN.md`, `CHANGELOG.md`, `AGENTS.md` if agent registry/pass-rate bookkeeping changes, and `DECISIONS.md` only if a new durable decision is made.
+- **Acceptance criteria:**
+  - QA visually verifies `/about` CountUp behavior and checks the first stat still displays `6+` without layout regressions.
+  - `CHANGELOG.md` records the completed About stats animation under `## Unreleased`.
+  - `PLAN.md` no longer advertises the previous completed hero task as current and reflects the CountUp task outcome.
+  - No durable decision is added unless the org chain identifies one.
+
+#### Active Agents
+
+| Agent | File | Assigned Scope | Status |
+|-------|------|---------------|--------|
+| registry-component-integrator | `.claude/agents/registry-component-integrator.md` | Phase A - add and inspect React Bits CountUp | done |
+| registry-component-integrator | `.claude/agents/registry-component-integrator.md` | Phase B - integrate CountUp into About stats | done |
+
+**Status values:** `pending` · `in-progress` · `blocked` · `done` · `approved`
+
 ### Current Task: Hero visual overhaul — organic photo + less boxy layout
 
 **Status:** COMPLETE — QA approved

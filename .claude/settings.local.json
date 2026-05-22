@@ -21,7 +21,11 @@
       "Read(//c/Users/hp/AppData/Roaming/npm/node_modules/**)",
       "Bash(git commit *)",
       "Bash(/c/Users/hp/.claude/skills/gstack/browse/dist/browse goto *)",
-      "Bash(/c/Users/hp/.claude/skills/gstack/browse/dist/browse screenshot *)"
+      "Bash(/c/Users/hp/.claude/skills/gstack/browse/dist/browse screenshot *)",
+      "Bash(/c/Users/hp/.claude/skills/gstack/browse/dist/browse js *)",
+      "Read(//c/Users/hp/codes/personal/farmgrow/.claude/**)",
+      "Read(//c/Users/hp/codes/personal/reunitar/.claude/**)",
+      "Read(//c/Users/hp/codes/personal/prisma/**)"
     ]
   }
 }

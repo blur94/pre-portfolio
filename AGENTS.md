@@ -102,6 +102,8 @@ when no existing agent scores adequately for fit against the current task.
 | Agent | File | Specialization | Last Used | QA Pass Rate |
 |-------|------|---------------|-----------|-------------|
 | ui-stylist | `.claude/agents/ui-stylist.md` | Visual/CSS restyling of React/TSX components using Tailwind + inline style props | 2026-05-22 | 1/1 (100%) |
+| registry-component-integrator | `.claude/agents/registry-component-integrator.md` | shadcn registry component installation and narrow React/TypeScript UI integration | 2026-05-22 | rework required (blocked first review) |
+| next-lint-migrator | `.claude/agents/next-lint-migrator.md` | Next.js lint command and ESLint CLI migration with narrow tooling scope | 2026-05-22 | pending |
 
 > **Org agents** (CEO, HR, Researcher, QA) live globally at `~/.claude/agents/` and are available in every project.
 > **Specialist agents** (e.g. ui-stylist) live per-project at `.claude/agents/` and are tuned to this codebase.
