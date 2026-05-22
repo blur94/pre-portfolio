@@ -30,8 +30,18 @@ const Magnet: React.FC<MagnetProps> = ({
 
   useEffect(() => {
     if (disabled) {
-      setPosition({ x: 0, y: 0 });
-      return;
+      let isMounted = true;
+
+      queueMicrotask(() => {
+        if (isMounted) {
+          setIsActive(false);
+          setPosition({ x: 0, y: 0 });
+        }
+      });
+
+      return () => {
+        isMounted = false;
+      };
     }
 
     const handleMouseMove = (e: MouseEvent) => {
