@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+
+import AnimatedContent from "@/components/AnimatedContent";
 
 export type Article = {
   slug: string;
@@ -11,54 +15,57 @@ export type Article = {
 
 interface ArticleCardProps {
   article: Article;
+  delay?: number;
 }
 
-export function ArticleCard({ article }: ArticleCardProps) {
+export function ArticleCard({ article, delay = 0 }: ArticleCardProps) {
   return (
-    <article className="flex flex-col gap-4">
-      {/* Cover image */}
-      <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-zinc-900/60">
-        {article.coverImage ? (
-          <Image
-            src={article.coverImage}
-            alt={article.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-        ) : (
-          <div className="flex h-full items-end p-4">
-            <span className="text-xs text-muted-foreground/30">article image</span>
-          </div>
-        )}
-      </div>
+    <AnimatedContent distance={40} duration={0.6} delay={delay}>
+      <article className="flex flex-col gap-4">
+        {/* Cover image */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-zinc-900/60">
+          {article.coverImage ? (
+            <Image
+              src={article.coverImage}
+              alt={article.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          ) : (
+            <div className="flex h-full items-end p-4">
+              <span className="text-xs text-muted-foreground/30">article image</span>
+            </div>
+          )}
+        </div>
 
-      {/* Meta */}
-      <div className="flex flex-col gap-2">
-        <h3
-          className="text-xl font-semibold leading-snug"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          {article.title}
-        </h3>
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          {article.description}
-        </p>
-      </div>
+        {/* Meta */}
+        <div className="flex flex-col gap-2">
+          <h3
+            className="text-xl font-semibold leading-snug"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            {article.title}
+          </h3>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {article.description}
+          </p>
+        </div>
 
-      {/* Footer */}
-      <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <span style={{ fontFamily: "var(--font-heading)" }}>{article.date}</span>
-        <a
-          href={article.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium transition-colors hover:text-foreground"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          Read Article ↗
-        </a>
-      </div>
-    </article>
+        {/* Footer */}
+        <div className="flex min-h-[44px] items-center justify-between text-xs text-muted-foreground">
+          <span style={{ fontFamily: "var(--font-heading)" }}>{article.date}</span>
+          <a
+            href={article.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-[44px] items-center font-medium transition-colors hover:text-foreground"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Read Article ↗
+          </a>
+        </div>
+      </article>
+    </AnimatedContent>
   );
 }
