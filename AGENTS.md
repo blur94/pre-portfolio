@@ -101,10 +101,12 @@ when no existing agent scores adequately for fit against the current task.
 
 | Agent | File | Specialization | Last Used | QA Pass Rate |
 |-------|------|---------------|-----------|-------------|
-| ui-stylist | `.claude/agents/ui-stylist.md` | Visual/CSS restyling of React/TSX components using Tailwind + inline style props | 2026-05-22 | 1/1 (100%) |
+| ui-stylist | `.claude/agents/ui-stylist.md` | Visual/CSS restyling of React/TSX components using Tailwind + inline style props | 2026-05-24 | 3/3 (100%) |
 | registry-component-integrator | `.claude/agents/registry-component-integrator.md` | shadcn registry component installation and narrow React/TypeScript UI integration | 2026-05-22 | approved after rework (0/1 first-pass) |
 | next-lint-migrator | `.claude/agents/next-lint-migrator.md` | Next.js lint command and ESLint CLI migration with narrow tooling scope | 2026-05-22 | 1/1 (100%) |
 | animation-lint-reworker | `.claude/agents/animation-lint-reworker.md` | Narrow lint fixes inside existing React animation components | 2026-05-22 | 1/1 (100%) |
+| plinth-data-assets-integrator | `.claude/agents/plinth-data-assets-integrator.md` | Plinth redesign data transcription and public asset integration with narrow data-layer scope | 2026-05-24 | 2/2 (100%) |
+| plinth-page-assembler | `.claude/agents/plinth-page-assembler.md` | Plinth redesign Next.js route/page assembly using existing data, components, and style rules | 2026-05-24 | 2/2 (100%) |
 
 > **Org agents** (CEO, HR, Researcher, QA) live globally at `~/.claude/agents/` and are available in every project.
 > **Specialist agents** (e.g. ui-stylist) live per-project at `.claude/agents/` and are tuned to this codebase.

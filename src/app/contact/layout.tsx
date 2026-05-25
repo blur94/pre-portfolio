@@ -1,9 +1,9 @@
 export const metadata = {
-  title: "Contact — Gilead Odo",
+  title: "Contact",
   description:
     "Get in touch with Gilead Odo — software developer exploring the intersection of design, music, and code.",
   openGraph: {
-    title: "Contact — Gilead Odo",
+    title: "Contact",
     description:
       "Get in touch with Gilead Odo — software developer exploring the intersection of design, music, and code.",
     type: "website",
@@ -11,7 +11,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact — Gilead Odo",
+    title: "Contact",
     description:
       "Get in touch with Gilead Odo — software developer exploring the intersection of design, music, and code.",
     creator: "@balmofcodes",

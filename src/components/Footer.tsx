@@ -1,3 +1,14 @@
+import Link from "next/link";
+
+import { Logo } from "@/components/Logo";
+
+const navLinks = [
+  { label: "Work", href: "/works" },
+  { label: "Writing", href: null },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
 const socialLinks = [
   {
     label: "Instagram",
@@ -42,40 +53,101 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-border/40 px-6 py-10 md:px-10">
-      <div className="flex flex-col items-center gap-6">
-        {/* Social icons */}
-        <div className="flex items-center gap-5">
-          {socialLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.label}
-              className="flex size-11 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.icon}
-            </a>
-          ))}
+    <footer
+      className="mt-[120px] border-t"
+      style={{
+        backgroundColor: "var(--bg-nav)",
+        borderColor: "var(--border-faint)",
+      }}
+    >
+      <div
+        className="mx-auto px-6 md:px-12"
+        style={{ maxWidth: "var(--container-max, 1440px)" }}
+      >
+        {/* 3-column: wordmark | nav links | social icons */}
+        <div className="grid grid-cols-1 gap-8 py-12 md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-12 md:py-16 md:pb-8">
+          {/* Left — wordmark */}
+          <Logo asLink />
+
+          {/* Center — nav links */}
+          <nav
+            className="flex flex-wrap items-center justify-start gap-x-6 gap-y-2 md:justify-center"
+            aria-label="Footer"
+          >
+            {navLinks.map((link) =>
+              link.href ? (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                className="text-base transition-colors hover:opacity-80"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    fontWeight: 500,
+                    letterSpacing: "-0.02em",
+                    color: "var(--text-muted, var(--muted-foreground))",
+                  }}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <span
+                  key={link.label}
+                  className="cursor-not-allowed text-sm opacity-40"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    fontWeight: 500,
+                    letterSpacing: "-0.02em",
+                    color: "var(--text-muted, var(--muted-foreground))",
+                  }}
+                  title="Coming soon"
+                >
+                  {link.label}
+                </span>
+              )
+            )}
+          </nav>
+
+          {/* Right — social icons */}
+          <div
+            className="flex items-center justify-start gap-4 md:justify-end"
+            role="group"
+            aria-label="Social links"
+          >
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+              className="flex size-[38px] items-center justify-center rounded-full transition-opacity hover:opacity-70"
+                style={{
+                  backgroundColor: "var(--bg-icon)",
+                  color: "var(--misc-icon-stroke)",
+                }}
+              >
+                {link.icon}
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* Contact info */}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <a href="tel:+2348123456789" className="flex min-h-[44px] items-center transition-colors hover:text-foreground">
-            +234 (812) 345 6789
-          </a>
-          <span className="text-border">·</span>
-          <a href="mailto:gilead.odo@gmail.com" className="flex min-h-[44px] items-center transition-colors hover:text-foreground">
-            gilead.odo@gmail.com
-          </a>
-        </div>
-
-        {/* Credits */}
-        <div className="flex w-full flex-col items-center justify-between gap-2 border-t border-border/40 pt-6 text-xs text-muted-foreground/60 sm:flex-row">
-          <span>Designed with ♥ &amp; Coffee</span>
-          <span>© Gilead Odo 2026 All rights reserved</span>
+        {/* Bottom bar */}
+        <div
+          className="flex flex-col items-start justify-between gap-2 border-t py-5 text-sm sm:flex-row sm:items-center"
+          style={{
+            borderColor: "var(--border-faint)",
+            color: "var(--text-muted, var(--muted-foreground))",
+            fontFamily: "var(--font-body)",
+            fontWeight: 500,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          <span>Designed with ❤️ &amp; Coffee</span>
+          <span>© {year} Gilead Odo</span>
         </div>
       </div>
     </footer>

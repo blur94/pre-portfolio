@@ -18,16 +18,10 @@ function Mark({ className }: { className?: string }) {
       aria-label="Gilead Odo mark"
       className={cn("shrink-0", className)}
     >
-      <rect
-        width="512"
-        height="512"
-        rx="96"
-        className="fill-white dark:fill-transparent"
-      />
       <g
         fill="none"
-        className="stroke-[#050505] dark:stroke-white"
-        strokeWidth={36}
+        stroke="currentColor"
+        strokeWidth={40}
         strokeLinecap="butt"
         strokeLinejoin="miter"
       >
@@ -45,13 +39,14 @@ function LogoContent({
   return (
     <span
       className={cn(
-        "flex items-center gap-2.5 sm:gap-3",
+        "flex items-center gap-2",
         className,
       )}
+      style={{ color: "var(--text-primary)" }}
     >
-      <Mark className={cn("h-8 w-8 sm:h-9 sm:w-9", iconClassName)} />
+      <Mark className={cn("h-6 w-6", iconClassName)} />
       <span
-        className="text-xl leading-none tracking-[-0.06em] sm:text-2xl"
+        className="text-[32px] leading-none tracking-[-0.06em]"
         style={{ fontFamily: "var(--font-display)" }}
         aria-label="Gilead Odo"
       >

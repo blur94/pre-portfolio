@@ -6,6 +6,7 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   globalIgnores([
+    ".handoff/**",
     ".gstack/**",
     ".next/**",
     "out/**",

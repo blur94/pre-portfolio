@@ -40,5 +40,7 @@ sendgrid.env
 .playwright-mcp/
 .playwright-cli/
 .gstack/
+.handoff/
 output/playwright/
+output/*.png
 research/screenshots/

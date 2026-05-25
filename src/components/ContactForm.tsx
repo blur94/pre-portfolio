@@ -1,184 +1,219 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { Send } from "lucide-react";
+import { useActionState, startTransition, useState } from "react";
+import { useForm, schemaResolver } from "@mantine/form";
+import { z } from "zod";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import type { ReactNode } from "react";
 
-import AnimatedContent from "@/components/AnimatedContent";
-import Magnet from "@/components/Magnet";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "./ui/button";
+import {
+  sendContactEmail,
+  type ContactActionState,
+} from "@/app/contact/actions";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
-type Details = {
-  name: string;
-  email: string;
-  message: string;
-};
+const schema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.email("Enter a valid email address"),
+  message: z.string().min(10, "Write at least 10 characters"),
+});
 
-const initialDetails: Details = {
-  name: "",
-  email: "",
-  message: "",
-};
+type Values = z.infer<typeof schema>;
 
 export function ContactForm() {
-  const [details, setDetails] = useState<Details>(initialDetails);
-  const [errors, setErrors] = useState<Partial<Details>>({});
-  const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<string>("");
+  const [serverState, dispatch, isPending] = useActionState<
+    ContactActionState,
+    Values
+  >(sendContactEmail, { status: "idle" });
 
-  const handleValidation = () => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const error: Partial<Details> = {};
+  const [didReset, setDidReset] = useState(false);
 
-    if (!details.name.trim()) error.name = "Full name is required";
-    if (!details.email.trim()) error.email = "Email is required";
-    else if (!re.test(details.email)) error.email = "Invalid email format";
-    if (!details.message.trim()) error.message = "Message is required";
+  const form = useForm<Values>({
+    mode: "controlled",
+    initialValues: { name: "", email: "", message: "" },
+    validate: schemaResolver(schema, { sync: true }),
+    validateInputOnBlur: true,
+  });
 
-    setErrors(error);
-    return error;
-  };
+  const handleSubmit = form.onSubmit((values) => {
+    setDidReset(false);
+    startTransition(() => dispatch(values));
+  });
 
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-    setStatus("");
-
-    const error = handleValidation();
-    if (Object.keys(error).length > 0) return;
-
-    try {
-      setSubmitting(true);
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(details),
-      });
-
-      const result = (await response.json()) as { message?: string };
-      if (!response.ok)
-        throw new Error(result.message ?? "Failed to send email");
-      setDetails(initialDetails);
-      setErrors({});
-      setStatus("Message sent successfully.");
-    } catch (error) {
-      setStatus(error instanceof Error ? error.message : "Message not sent.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleChange = (prop: keyof Details, value: string) => {
-    setDetails((prev) => ({ ...prev, [prop]: value }));
-  };
+  if (serverState.status === "success" && !didReset) {
+    return (
+      <div
+        role="status"
+        className="rounded-2xl border p-10"
+        style={{
+          backgroundColor: "var(--bg-surface)",
+          borderColor: "var(--border-faint)",
+        }}
+      >
+        <p
+          className="mb-4 text-[40px] leading-none tracking-[-0.06em]"
+          style={{
+            fontFamily: "var(--font-display)",
+            color: "var(--text-primary)",
+          }}
+        >
+          Sent.
+        </p>
+        <p
+          className="text-[22px] leading-[1.4] tracking-[-0.03em]"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          I will reply within two working days.
+        </p>
+        <button
+          type="button"
+          className="mt-8 inline-flex h-10 items-center gap-2 rounded-full border px-5 text-sm font-medium"
+          style={{
+            borderColor: "var(--border-subtle)",
+            color: "var(--text-primary)",
+            fontFamily: "var(--font-heading)",
+          }}
+          onClick={() => {
+            form.reset();
+            setDidReset(true);
+          }}
+        >
+          Send another
+          <ArrowRight size={16} aria-hidden="true" />
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mx-auto flex w-full max-w-xl flex-col gap-5"
-      noValidate
-    >
-        <AnimatedContent distance={30} duration={0.6} delay={0.1}>
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="name"
-                className="text-xs uppercase text-muted-foreground"
-              >
-                Full Name
-              </Label>
-              <Input
-                id="name"
-                name="name"
-                autoComplete="name"
-                placeholder="Your name"
-                value={details.name}
-                onChange={(event) => handleChange("name", event.target.value)}
-                aria-invalid={Boolean(errors.name)}
-                className="border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50"
-              />
-              {errors.name ? (
-                <p className="text-xs text-destructive">{errors.name}</p>
-              ) : null}
-            </div>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <h2
+        className="mb-2 text-2xl font-semibold leading-[1.2] tracking-[-0.06em]"
+        style={{
+          fontFamily: "var(--font-heading)",
+          color: "var(--text-primary)",
+        }}
+      >
+        Tell me about your project
+      </h2>
 
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="email"
-                className="text-xs uppercase text-muted-foreground"
-              >
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="you@example.com"
-                value={details.email}
-                onChange={(event) => handleChange("email", event.target.value)}
-                aria-invalid={Boolean(errors.email)}
-                className="border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50"
-              />
-              {errors.email ? (
-                <p className="text-xs text-destructive">{errors.email}</p>
-              ) : null}
-            </div>
-          </div>
-        </AnimatedContent>
+      <Field label="Name" htmlFor="cf-name" error={form.errors.name}>
+        <Input
+          id="cf-name"
+          {...form.getInputProps("name")}
+          className="w-full rounded-xl border px-4 py-3.5 text-lg leading-[1.4] tracking-[-0.02em] outline-none transition-colors focus:border-(--text-primary)"
+          style={{
+            backgroundColor: "var(--bg-page)",
+            borderColor: "var(--border-faint)",
+            color: "var(--text-primary)",
+          }}
+          placeholder="Your full name"
+        />
+      </Field>
 
-        <AnimatedContent distance={30} duration={0.6} delay={0.2}>
-          <div className="flex flex-col gap-2">
-            <Label
-              htmlFor="message"
-              className="text-xs uppercase text-muted-foreground"
-            >
-              Message
-            </Label>
-            <Textarea
-              id="message"
-              name="message"
-              placeholder="Tell me about your project..."
-              value={details.message}
-              onChange={(event) => handleChange("message", event.target.value)}
-              aria-invalid={Boolean(errors.message)}
-              className="min-h-28 resize-none border-border/50 bg-background/50 backdrop-blur-sm transition-all focus-visible:border-primary/50 md:min-h-32"
-            />
-            {errors.message ? (
-              <p className="text-xs text-destructive">{errors.message}</p>
-            ) : null}
-          </div>
-        </AnimatedContent>
+      <Field label="Email" htmlFor="cf-email" error={form.errors.email}>
+        <Input
+          id="cf-email"
+          type="email"
+          {...form.getInputProps("email")}
+          className="w-full rounded-xl border px-4 py-3.5 text-lg leading-[1.4] tracking-[-0.02em] outline-none transition-colors focus:border-(--text-primary)"
+          style={{
+            backgroundColor: "var(--bg-page)",
+            borderColor: "var(--border-faint)",
+            color: "var(--text-primary)",
+          }}
+          placeholder="you@company.com"
+        />
+      </Field>
 
-        <AnimatedContent distance={20} delay={0.4}>
-          <div className="flex justify-start">
-            <Magnet padding={50} magnetStrength={3}>
-              <Button
-                type="submit"
-                size="lg"
-                className="group w-full gap-2 px-8 font-medium sm:w-auto"
-                disabled={submitting}
-              >
-                {submitting ? "Sending..." : "Send message"}
-                <Send
-                  data-icon="inline-end"
-                  aria-hidden="true"
-                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </Button>
-            </Magnet>
-          </div>
-        </AnimatedContent>
+      <Field label="Message" htmlFor="cf-message" error={form.errors.message}>
+        <Textarea
+          id="cf-message"
+          rows={6}
+          {...form.getInputProps("message")}
+          className="min-h-42 w-full resize-y rounded-xl border px-4 py-3.5 text-lg leading-[1.4] tracking-[-0.02em] outline-none transition-colors focus:border-(--text-primary)"
+          style={{
+            backgroundColor: "var(--bg-page)",
+            borderColor: "var(--border-faint)",
+            color: "var(--text-primary)",
+          }}
+          placeholder="What are you building, what's the timeline, and what would success look like?"
+        />
+      </Field>
 
-        {status ? (
-          <p
-            role="status"
-            className={`text-sm ${status.includes("successfully") ? "text-primary" : "text-destructive"}`}
+      <Button
+        type="submit"
+        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-base font-medium transition-colors hover:bg-(--accent-primary) hover:text-(--text-on-accent) disabled:cursor-not-allowed disabled:opacity-60 md:w-auto md:self-start"
+        style={{
+          backgroundColor: "var(--text-primary)",
+          color: "var(--bg-page)",
+          fontFamily: "var(--font-heading)",
+        }}
+        disabled={isPending}
+      >
+        {isPending ? "Sending..." : "Send Message"}
+        {!isPending && <ArrowUpRight size={18} aria-hidden="true" />}
+      </Button>
+
+      {serverState.status === "error" && (
+        <p
+          role="alert"
+          className="rounded-xl border px-4 py-3.5 text-sm font-medium leading-normal tracking-[-0.02em]"
+          style={{
+            backgroundColor: "var(--bg-surface-alt)",
+            borderColor: "var(--border-default)",
+            color: "var(--text-primary)",
+            fontFamily: "var(--font-heading)",
+          }}
+        >
+          {serverState.message} Try again, or email me directly at{" "}
+          <a
+            href="mailto:hello@gileadodo.xyz"
+            className="underline underline-offset-4"
           >
-            {status}
-          </p>
-        ) : null}
+            hello@gileadodo.xyz
+          </a>
+          .
+        </p>
+      )}
     </form>
+  );
+}
+
+function Field({
+  label,
+  htmlFor,
+  error,
+  children,
+}: {
+  label: string;
+  htmlFor: string;
+  error?: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label
+        htmlFor={htmlFor}
+        className="text-xs font-medium uppercase tracking-[0.06em]"
+        style={{
+          fontFamily: "var(--font-heading)",
+          color: "var(--text-tertiary)",
+        }}
+      >
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p
+          className="text-sm text-destructive"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          {error}
+        </p>
+      )}
+    </div>
   );
 }
