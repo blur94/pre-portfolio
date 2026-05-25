@@ -42,3 +42,5 @@ sendgrid.env
 .gstack/
 output/playwright/
 research/screenshots/
+output/*
+.handoff/*
