@@ -35,279 +35,550 @@ export type Work = {
 export const works: Work[] = [
   {
     slug: "verivafrica",
-    title: "VerivAfrica",
-    descriptor: "Identity verification for African fintechs.",
+    title: "Veriv Africa",
+    descriptor:
+      "Data intelligence platform for Nigerian businesses and policymakers.",
     overview:
-      "VerivAfrica provides real-time identity verification across African markets — NIN, BVN, driver's licence, passport — for fintechs, lenders, and government agencies. I led the partner dashboard and the embeddable SDK.",
-    role: "Lead frontend",
-    client: "VerivAfrica Ltd.",
+      "Veriv Africa publishes economic analyses, macroeconomic outlooks, policy explainers, and thematic articles for businesses, investors, and government stakeholders across Nigeria. I built the full frontend: the editorial article and insights system, long-form content rendering across two CMSes, the Mantine component layer, and the Framer Motion motion design.",
+    role: "Frontend",
+    client: "Veriv Africa",
     year: "2024",
-    category: "Fintech",
-    tags: ["React", "Node.js", "PostgreSQL"],
+    category: "Media",
+    tags: ["Next.js", "Mantine", "Sanity", "TypeScript", "Framer Motion"],
     isLive: true,
     coverImage: "/projects/verivafrica.png",
     context:
-      "African KYC vendors all shipped APIs, but few shipped a usable operator surface. Partners stitched our endpoints into homegrown admin tools and lost hours every week chasing failed verifications.",
+      "Nigerian decision-makers — businesses, investors, policymakers — lacked a trusted, data-grounded platform for rigorous economic and political analysis. The team had the research and the contributors; the missing piece was a frontend that made that content feel credible, readable, and worth returning to.",
     constraints: [
-      "Render up to 800 live verifications per minute without UI hiccups.",
-      "Run inside partner brand shells — no Plinth chrome leaking through.",
-      "Pass NDPR audit on the first review pass.",
+      "Dual CMS (Contentful + Sanity) — two content pipelines feeding one consistent editorial UI.",
+      "SSR on every article page — no stale cache on a live-analysis platform.",
+      "Motion had to feel modern without distracting from serious policy and economic content.",
     ],
     process: [
       {
-        title: "Mapping the verification states",
-        body: "Eleven outcomes, four document types, three retry paths — I diagrammed the full state graph before writing a single component, then mapped each state to a single status surface in the dashboard.",
+        title: "Content architecture before components",
+        body: "The publishing flow had to scale across reports, insights, and category pages before the first screen was built. I mapped the content types coming from Contentful and Sanity and established the layout contracts each would need — column widths, typographic rhythm, spacing scale — before writing a component.",
         artifact: { kind: "image", src: "/projects/verivafrica.png" },
       },
       {
-        title: "A status surface that ages",
-        body: "Dashboards rot the moment marketing changes the funnel. I split the partner UI into 'stream' (rolling live events) and 'queue' (work items awaiting an operator), each owning its own data lifecycle. New event types add to the stream without touching the queue.",
-        artifact: { kind: "image", src: "/projects/recurrent.png" },
+        title: "Pushing Mantine past its dashboard defaults",
+        body: "Mantine defaults toward data-dense UIs. A long-form editorial platform needs something different — tighter leading, wider measure, quieter chrome. I reworked the typographic and spacing system to read well at depth while keeping the component library consistent and maintainable underneath.",
+        artifact: { kind: "image", src: "/projects/verivafrica.png" },
       },
       {
-        title: "An SDK that doesn't fight its host",
-        body: "The embed SDK ships its own CSS reset and a single :host scope. Partners style the verify button to match their UI; everything inside the iframe is locked to Plinth.",
+        title: "Motion that earns its place",
+        body: "A research platform can't feel like a product launch site. Every animation is transform-based and capped at the section level — no loops, no distractions. The hero fades up on load; the page breathes. Motion signals freshness without competing with the content.",
         artifact: {
           kind: "code",
-          body: `// init the embed
-import { Veriv } from "@veriv/sdk";
+          body: `const variants = {
+  hidden: { y: 100, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+};
 
-Veriv.init({
-  publicKey: process.env.VERIV_KEY,
-  theme: "match-parent",
-  on: {
-    success: (id) => analytics.track("kyc_passed", { id }),
-    fail:    (err) => analytics.track("kyc_failed", { err })
-  }
-});`,
+<motion.div
+  initial="hidden"
+  animate="visible"
+  transition={{ duration: 2.5 }}
+  variants={variants}
+>
+  <Image src={hero.src} alt="hero" h="100%" w="100%" />
+</motion.div>`,
         },
       },
     ],
     outcomes: [
-      { number: "11k", label: "Verifications / day at peak" },
-      { number: "92%", label: "First-pass success rate" },
-      { number: "—40%", label: "Operator time per case" },
+      { number: "Feb 2024", label: "Platform launch" },
+      { number: "3", label: "Content types: articles, reports, insights" },
+      { number: "10+", label: "Thematic categories at launch" },
     ],
     lessons:
-      "Operators don't want 'real-time'. They want predictable. The streaming surface only became useful once we slowed it to a one-second tick and added a pause button. Speed isn't the same as throughput.",
+      "Building Veriv Africa taught me that frontend engineering is heavily tied to perception and trust — especially for research-driven platforms. Small decisions around typography, spacing, motion, and content hierarchy completely change how credible or approachable information feels. Motion works best when it supports clarity instead of competing for attention. The project pushed me to think less like someone assembling components and more like someone shaping how people consume and interpret information.",
   },
   {
     slug: "recurrent",
-    title: "Recurrent.ng",
-    descriptor: "Recurring billing on top of Paystack.",
+    title: "re:current",
+    descriptor:
+      "Property management platform for Nigerian landlords and letting agents.",
     overview:
-      "Nigerian SaaS founders kept losing recurring revenue to silent card failures. Recurrent abstracts Paystack into a subscription primitive — billing intervals, dunning, proration, self-service.",
-    role: "Full-stack",
-    client: "Recurrent.ng",
-    year: "2024",
-    category: "Fintech",
-    tags: ["Next.js", "Paystack", "PostgreSQL"],
+      "re:current is a full-stack property management platform for landlords, property managers, shortlet hosts, and realtors. It consolidates tenant onboarding, rent collection, invoicing, bookings, and identity verification into one dashboard. I built the frontend: the route group architecture, the booking calendar, PDF agreement and invoice generation, and the real-time dashboard layer.",
+    role: "Frontend",
+    client: "Current Finance Limited",
+    year: "2023",
+    category: "PropTech",
+    tags: ["Next.js", "Mantine", "TypeScript", "TanStack Query", "Socket.io"],
     isLive: true,
     coverImage: "/projects/recurrent.png",
     context:
-      "Paystack's subscription primitive only handles fixed-interval billing. Real SaaS needs proration, mid-cycle plan changes, configurable dunning, and self-service — none of which exist in the gateway. Teams were rebuilding the same layer over and over.",
+      "Landlords and property managers were running their operations across disconnected tools — separate invoicing software, manual KYC, paper tenancy agreements, and no unified view of bookings or payments. re:current consolidates the full property workflow into one platform, from tenant onboarding and verification to rent collection, short-let bookings, and digital agreements.",
     constraints: [
-      "Idempotent on every gateway retry.",
-      "Operator dashboard renders three years of history without pagination tricks.",
-      "Customer portal lives at a partner subdomain.",
+      "Three distinct property modes — rentals, short-lets, and sales — each with different data models, workflows, and UI flows under a single dashboard.",
+      "Identity verification at both tenant onboarding and guest check-in/check-out, integrated via Veriff SDK.",
+      "PDF output for tenancy agreements carries legal weight — layout and fidelity had to match what tenants sign.",
+      "Real-time metrics (live user count, booking updates) via Socket.io without impacting dashboard stability.",
     ],
     process: [
       {
-        title: "Subscriptions as an event log",
-        body: "Every state change is appended to an immutable log. Reports become reductions, not joins. Bugs become 'replay this customer from event N' instead of 'guess at history'.",
+        title: "Separating operator and guest surfaces",
+        body: "The platform serves two fundamentally different users — landlords managing their portfolio and guests booking short-lets. I separated these into distinct route groups: (landlord) for the authenticated operator dashboard and (public) for guest-facing property listings and booking pages. The split gave each surface its own layout, auth logic, and data loading strategy without the two leaking into each other.",
         artifact: { kind: "image", src: "/projects/recurrent.png" },
       },
       {
-        title: "Dunning that sells itself",
-        body: "The retry copy is the surface most founders touch. I built a copy editor next to the schedule editor — operators see the email a customer would get on day 3 alongside the day-3 retry attempt. No more 'I forgot we said that'.",
-        artifact: { kind: "image", src: "/projects/prunepayments-admin.png" },
+        title: "A booking calendar that understands availability",
+        body: "Short-let and hotel bookings require per-unit availability tracking across multiple days, with OTA channel sync to prevent double-bookings. I built the calendar view on Schedule-X, wiring it to the booking state layer. Each day cell reflects which units are available, occupied, or pending — without the operator needing to cross-reference a separate list.",
+        artifact: { kind: "image", src: "/projects/recurrent.png" },
       },
       {
-        title: "A portal that doesn't need support",
-        body: "Cancellation needed a reason. I built a free-text reason capture that piped into a one-line analytics surface — not a dashboard. The founders read every reason, every Monday.",
-        artifact: { kind: "image", src: "/projects/prunepayments.png" },
+        title: "PDF generation for documents with legal weight",
+        body: "Tenancy agreements and invoices aren't just exports — they're legally binding documents tenants sign and landlords store for years. No single PDF library handled both structured agreement layout and invoice snapshot fidelity well, so I used react-pdf/renderer for agreements and jspdf + html2canvas for invoices. The output matches exactly what's on screen.",
+        artifact: { kind: "image", src: "/projects/recurrent.png" },
       },
     ],
     outcomes: [
-      { number: "42", label: "SaaS teams onboarded" },
-      { number: "—31%", label: "Involuntary churn after dunning" },
-      { number: "₦2.4M", label: "MRR processed monthly" },
+      { number: "50+", label: "Property businesses on the platform" },
+      { number: "181", label: "Concurrent users online at peak (live)" },
+      { number: "3", label: "Property modes: rentals, short-lets, sales" },
     ],
     lessons:
-      "The hardest part of subscription billing isn't the math, it's the receipts. Every state change has to be explainable to a customer in one sentence, two years later, after the operator who set it up has left.",
+      "Building re:current taught me a lot about designing software around real operational behavior instead of ideal user flows. Property management looks straightforward on the surface, but once tenants, landlords, payments, agreements, reminders, and verification workflows interact, the edge cases multiply quickly. I learned the importance of building flexible systems that can handle incomplete states, delayed actions, and constantly changing business rules without making the UI feel chaotic. The project also deepened my understanding of trust-driven product design. Features like recurring payments, tenancy agreements, and tenant verification carry financial and legal weight, so clarity became more important than visual complexity. I became more intentional about reducing friction, communicating system states clearly, and designing interfaces that helped users feel confident about important actions. Technically, it reinforced the value of scalable frontend architecture. Managing large forms, nested workflows, async payment states, and reusable dashboard components taught me how important predictable state management, strong typing, and modular UI systems are as products grow.",
   },
   {
     slug: "qatapolt",
     title: "Qatapolt Admin",
-    descriptor: "Operator dashboard for a sports prediction platform.",
+    descriptor: "Admin dashboard for a sports social network.",
     overview:
-      "Qatapolt's operations team needed a single pane of glass over live matches, user behaviour, revenue, and content moderation. I built the dashboard, the chart components, and the WebSocket layer that feeds them.",
-    role: "Frontend & data viz",
+      "Qatapolt is a sports social network where athletes build sport-tagged profiles, post content, follow each other, and earn trophies. The operations team needed a single surface to monitor platform health and moderate the community. I built the dashboard metrics layer, the multi-module admin UI — enquiries, reported users, reported posts, news CRUD with a TipTap rich-text editor — the account moderation flows, and the trophies management screen.",
+    role: "Frontend",
     client: "Qatapolt",
-    year: "2023",
+    year: "2024",
     category: "Sports",
-    tags: ["React", "TypeScript", "Recharts"],
+    tags: ["Next.js", "TypeScript", "Mantine", "Recharts", "Zustand"],
     isLive: true,
     coverImage: "/projects/qatapolt.png",
     context:
-      "The prediction platform was burning operator hours triaging fraud signals through three separate tools. We needed one operator surface — live, dense, and quiet enough to leave open on a second monitor.",
+      "The sports community launched with user-reported content and conduct issues spread across manual processes. The ops team needed a unified admin surface to track platform health — downloads, users, posts — moderate reported content and users, manage the news feed, and act on account escalations, all without pulling in engineering.",
     constraints: [
-      "Render 60s of live match ticks at 30fps on mid-tier laptops.",
-      "Operator roles split four ways, with read-only audit history.",
-      "Zero new dependencies — Recharts only.",
+      "Three separate backend services (core, liaison, admin), each expecting the same forwarded session token.",
+      "Cookie-based JWT had to be threaded cleanly through every Next.js Server Action or the whole surface failed silently.",
+      "Mantine Charts and Recharts coexist — donut and area charts on Mantine, other views on Recharts.",
+      "TipTap rich-text editor for news had to produce portable HTML persisted to the backend.",
     ],
     process: [
       {
-        title: "What is a 'second monitor' chart?",
-        body: "I redrew every chart from a 'glance' baseline — what does this look like at 1m, peripheral vision, on a Friday afternoon? Heatmaps replaced bar charts wherever density mattered more than precision.",
+        title: "A dashboard that reads at a glance",
+        body: "The landing surface answers the operator's first three questions immediately — how many downloads, posts, and users — then breaks the user base down by age, gender, and country. Server Actions fetch metrics and visitors with the session token forwarded from cookies; the data is passed straight to Mantine donut charts and a paginated visitor table tagged by sport.",
         artifact: { kind: "image", src: "/projects/qatapolt.png" },
       },
       {
-        title: "Streaming without flicker",
-        body: "The WebSocket layer batches ticks at 100ms boundaries. The chart layer requests animation frames only when a tick crosses a redraw threshold. Operators stopped noticing the live data — which is exactly what we wanted.",
+        title: "Moderation as a queue, not a hunt",
+        body: "Reported users and posts arrive with everything an operator needs to decide: category (harassment, spam, fraud, impersonation), reason, reporter, and status. The job wasn't displaying the reports — it was removing every extra click between seeing a problem and resolving it, so block and delete actions live inline.",
+        artifact: { kind: "image", src: "/projects/qatapolt.png" },
+      },
+      {
+        title: "Forwarding auth through every Server Action",
+        body: "Three backend services sat behind the admin, each expecting the same bearer token. I treated auth threading as an architectural concern rather than a per-request afterthought: every Server Action reads the qatAuth cookie and forwards it, so a single session drives the whole surface.",
         artifact: {
           kind: "code",
-          body: `// match-tick batching
-useEffect(() => {
-  const ws = new WebSocket(MATCH_WS);
-  let queue: unknown[] = [];
-  let raf: number | null = null;
-  ws.onmessage = (e) => {
-    queue.push(JSON.parse(e.data));
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      flush(queue);
-      queue = [];
-      raf = null;
-    });
-  };
-  return () => ws.close();
-}, []);`,
+          body: `// every admin server action forwards the session token
+export const getDashMetrics = async () => {
+  const token = (await cookies()).get("qatAuth")?.value;
+  const { data: res } = await axios.get(\`\${core}/admin/dashboard/metrics\`, {
+    headers: { Authorization: \`Bearer \${token}\` },
+  });
+  return { success: true, data: res.data };
+};`,
         },
       },
     ],
     outcomes: [
-      { number: "<60ms", label: "Operator-perceived tick latency" },
-      { number: "4", label: "Tools collapsed into one" },
-      { number: "100%", label: "Audit trail coverage" },
+      { number: "6+", label: "Countries with active users" },
+      { number: "143", label: "Community posts moderated" },
+      { number: "9", label: "Admin modules in one dashboard" },
     ],
     lessons:
-      "Dense operator dashboards aren't won on chart libraries. They're won on what you leave out. The first version had 22 widgets; the shipped version has 9, and operators reach for it before their inbox.",
+      "Admin dashboards tempt you to surface everything the backend exposes. The harder discipline was deciding what an operator actually acts on daily — metrics to glance at, queues to clear — and letting the rest stay one click away. Moderation tooling in particular lives or dies on how fast someone can go from signal to action.",
   },
   {
     slug: "prune",
     title: "Prune Payments",
-    descriptor: "Cleaner billing for small Nigerian merchants.",
+    descriptor:
+      "Banking-as-a-service platform for issuing multi-currency accounts.",
     overview:
-      "Prune lets corner-shop merchants take payments without a POS. I designed and shipped both the customer-facing checkout and the merchant admin.",
-    role: "Frontend & design",
+      "Prune is a banking-as-a-service platform that lets businesses issue and operate multi-currency accounts (EUR, GBP, USD) with full IBAN, Sort Code, and ACH details. I built the frontend across two surfaces: the business dashboard — accounts, transactions, payouts, beneficiaries, debit requests, and role-based team management — and the internal admin console for business onboarding (KYB), eligibility, pricing plans, and account approvals.",
+    role: "Frontend",
     client: "Prune",
-    year: "2023",
+    year: "2024",
     category: "Fintech",
-    tags: ["Next.js", "Tailwind", "Mantine"],
+    tags: ["Next.js", "TypeScript", "Mantine", "AG Grid", "Zustand"],
     isLive: true,
-    coverImage: "/projects/prunepayments.png",
+    coverImage: "/projects/prune.png",
     context:
-      "Most merchant tools assume a literate, English-first, smartphone-first user. Prune's first customers ran their tills on a single Android tablet in poor light, between five other things.",
+      "Businesses that want to offer banking features rarely want to become a bank. Prune provides the account-issuing, payout, and transaction rails as a service, so a business can spin up multi-currency accounts and move money under their own brand. That demands two very different surfaces — a self-serve operator dashboard for the business, and an internal admin console for Prune to vet and manage those businesses.",
     constraints: [
-      "Every primary action reachable in two taps.",
-      "Works in low contrast, single-handed, with greasy fingers.",
-      "Receipts print to a Bluetooth thermal printer with no driver.",
+      "Four separate backend services (auth, core, accounts, payout) behind one client — env-validated with Zod at boot.",
+      "Two distinct apps in one codebase: the business dashboard and the internal admin, split via Next.js route groups.",
+      "Role-based access control with an initiator/approver model — every sensitive action gated on granular permissions.",
+      "Money-movement documents (receipts, statements) generated client-side as PDF and exported to Excel.",
     ],
     process: [
       {
-        title: "Designed for the worst-case till",
-        body: "I sketched the till in the worst lighting we'd ever seen one in — a kiosk under sodium street lamps. Type sizes started at 22px and went up.",
-        artifact: { kind: "image", src: "/projects/prunepayments.png" },
+        title: "Two surfaces, one codebase",
+        body: "The platform serves two fundamentally different users — businesses operating their own accounts, and Prune staff vetting those businesses. I separated them into distinct Next.js route groups, each with its own layout, navigation, and permission model, so operator and staff flows never leak into each other.",
+        artifact: { kind: "image", src: "/projects/prune-customer.png" },
       },
       {
-        title: "An admin that respects literacy",
-        body: "The merchant admin reads at a 6th-grade level. Every number has its currency symbol; every action a verb. No 'Apply'. 'Save'. 'Send'. 'Refund'.",
-        artifact: { kind: "image", src: "/projects/prunepayments-admin.png" },
+        title: "Permissions as a first-class concern",
+        body: "Money movement needs guardrails. I built RBAC around an initiator/approver pattern: a useHasPermission hook gates every sensitive action — transaction initiation, approvals — so the same UI adapts to each team member's role rather than hiding logic behind a single admin flag.",
+        artifact: { kind: "image", src: "/projects/prune.png" },
+      },
+      {
+        title: "Multi-currency accounts and money movement",
+        body: "Each account carries its own real banking identifiers — IBAN, Sort Code, ACH Routing — across EUR, GBP, and USD, with per-currency transaction views, payouts, and downloadable statements. Receipts and statements are generated client-side as PDF and exported to Excel, matching exactly what's on screen.",
+        artifact: { kind: "image", src: "/projects/prune.png" },
       },
     ],
     outcomes: [
-      { number: "2.1s", label: "Median time-to-checkout" },
-      { number: "880+", label: "Active merchants" },
-      { number: "98.1%", label: "Receipt-print success rate" },
+      { number: "58", label: "Businesses onboarded" },
+      { number: "258", label: "Account requests approved" },
+      { number: "80", label: "Active accounts issued" },
     ],
     lessons:
-      "Accessibility isn't a checklist when the user is on a tablet in the sun. It's the whole product. Plinth's 16px minimum body size came directly from this engagement.",
+      "Building money-movement software taught me that permissions aren't a feature you bolt on — they're the architecture. Once you model an initiator/approver flow honestly, every screen has to answer 'who is allowed to do this, and what happens when they can't?'. Splitting the operator and admin surfaces early kept that complexity contained instead of letting two very different products fight inside one layout.",
   },
   {
     slug: "raia",
     title: "Raia",
-    descriptor: "Compliance, distilled for African insurers.",
+    descriptor: "Ecosystem hub for responsible AI across Africa.",
     overview:
-      "Raia turns regulatory text into testable rules. The product reads a circular from NAICOM or the Kenya IRA, extracts obligations, and routes them to the right operator.",
-    role: "Design engineering",
-    client: "Raia",
-    year: "2024",
-    category: "Regtech",
-    tags: ["React", "Next.js", "Tailwind"],
-    isLive: false,
+      "Responsible AI Africa is an ecosystem hub for the responsible-AI community across the continent — directories of organisations and AI indexes, funding opportunities, events, jobs, and country-level AI landscapes. I built it on Payload CMS: the content model and collections, an access-control layer, a transactional email outbox, and the Mantine-based public site with on-demand revalidation so editors publish without a redeploy.",
+    role: "Full-stack",
+    client: "Responsible AI Africa",
+    year: "2025",
+    category: "Civic Tech",
+    tags: ["Next.js", "TypeScript", "Payload CMS", "Mantine", "MongoDB"],
+    isLive: true,
     coverImage: "/projects/raia-dark.png",
     context:
-      "Compliance teams at small insurers were reading 200-page circulars in PDF and translating them into Excel by hand. Mistakes cost real money. Raia exists to turn that translation into a code review.",
+      "Africa's responsible-AI ecosystem — the people, funders, events, initiatives, and country-level policy landscape — was scattered across PDFs, mailing lists, and social posts. Raia centralises it into one searchable, continuously-updated hub that a non-technical editorial team can run themselves, while the public site stays fast and current.",
     constraints: [
-      "Side-by-side reading view — source text and extracted rule, always.",
-      "Operators can disagree with the model, in line, with a reason.",
-      "Audit-grade: every change is signed and timestamped.",
+      "Non-technical editors own all content — everything runs through the Payload admin, not code.",
+      "Published content must go live without a redeploy — on-demand revalidation wired into collection hooks.",
+      "Transactional email had to be reliable, so it's modelled as a persisted email outbox rather than fire-and-forget.",
+      "A dozen content types share one consistent, searchable public surface.",
     ],
     process: [
       {
-        title: "The two-column reading view",
-        body: "I refused a tab. The source PDF and the extracted rule live side-by-side, scrolling in lockstep. If the operator can't see both at once, the product doesn't work.",
-        artifact: { kind: "image", src: "/projects/raia-dark.png" },
+        title: "Model the ecosystem, then build the screens",
+        body: "I defined the Payload collections — directories, funding, events, jobs, insights, international initiatives, countries — and the relationships between them before building the public UI. Getting the content model right first gave the editorial team a coherent system to fill instead of a pile of disconnected pages.",
+        artifact: { kind: "image", src: "/projects/raia-admin.png" },
       },
       {
-        title: "Disagreement as a primary action",
-        body: "Most regtech treats human override as an exception. Raia treats it as the loop. Every extracted rule has a 'this is wrong' affordance with a required reason; reasons become training data for the model.",
+        title: "Editing without engineering",
+        body: "The editorial team can't wait for a deploy to publish. I wired on-demand revalidation hooks into the collections so a single Payload edit invalidates exactly the affected pages — content goes live in seconds, with no redeploy and no stale cache.",
+        artifact: { kind: "image", src: "/projects/raia-light.png" },
+      },
+      {
+        title: "Email as an outbox, not fire-and-forget",
+        body: "Newsletter and contact flows can't silently drop messages. Rather than calling the email provider and hoping, I modelled an EmailOutbox collection so every transactional send is persisted, inspectable, and retryable — a queue you can audit instead of a side effect you can't.",
         artifact: { kind: "image", src: "/projects/raia-light.png" },
       },
     ],
     outcomes: [
-      { number: "4", label: "Insurers in pilot" },
-      { number: "—68%", label: "Time to translate a circular" },
-      { number: "97%", label: "Operator agreement with extraction" },
+      { number: "54", label: "African countries profiled" },
+      { number: "7", label: "International AI initiatives tracked" },
+      { number: "5", label: "Directory categories of AI actors" },
     ],
     lessons:
-      "When the model is the product, the disagreement UI is the product. Hide it and you lose the loop.",
+      "Building a content platform for a non-technical team taught me that the real product is the editing experience, not just the public site. Modelling the domain carefully up front — clear collections, honest relationships, a glossary everyone agrees on — does more for long-term velocity than any frontend polish. And treating side effects like email as persisted, inspectable state rather than fire-and-forget calls is what makes a content system trustworthy to run.",
   },
   {
     slug: "reunitar",
     title: "Reunitar",
-    descriptor: "Family reunification logistics, simplified.",
+    descriptor:
+      "Offline-first lost-and-found operations for large conventions.",
     overview:
-      "Reunitar coordinates the paperwork of family reunification for African diaspora — embassy appointments, document checklists, immigration timelines.",
-    role: "Frontend",
+      "Reunitar is an offline-first lost-and-found operations app for large conventions. Staff run checkroom and lost-and-found counters — item intake, release, claims, disposition, missing-item reports, and person-case escalation — across multiple conventions, with role-scoped access and post-event reporting. I built it full-stack on Next.js and Prisma, including a local-first RxDB sync layer so staff keep working when venue Wi-Fi drops, and a semantic search layer (MongoDB Atlas vector + hybrid search) that matches free-text descriptions of lost and found items.",
+    role: "Full-stack",
     client: "Reunitar",
-    year: "2022",
-    category: "Civic",
-    tags: ["Next.js", "Prisma", "shadcn/ui"],
+    year: "2026",
+    category: "Operations",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "MongoDB",
+      "RxDB",
+      "Vector Search",
+      "shadcn/ui",
+    ],
     isLive: false,
     coverImage: "/projects/reunitar-dark.png",
     context:
-      "Reunification is a multi-year, multi-jurisdiction process. Families used a different tool per step — sometimes a different tool per family member. Things got lost.",
+      "Lost-and-found at a big convention is a logistics problem: thousands of items, rotating volunteer staff, anxious attendees, and notoriously unreliable venue Wi-Fi. Reunitar gives staff a single operations workspace that keeps running offline, matches found items to missing reports by meaning rather than exact keywords, and gives supervisors coverage alerts and post-event reporting.",
     constraints: [
-      "Works across timezones, languages, and consular calendars.",
-      "Visible progress for non-technical family members.",
-      "Document uploads survive a two-year archive policy.",
+      "Venue Wi-Fi is unreliable — intake and person-cases must work fully offline and sync later (RxDB + custom pull/push).",
+      "`navigator.onLine` can't be trusted, so writes auto-fall-back to local IndexedDB on detected network failure.",
+      "Offline edits create genuine conflicts — resolved server-wins automatically, with a human-in-the-loop merge UI for real divergence.",
+      "Auth itself must survive offline — a signed session-cache JWT keeps staff working for 24h without the database.",
+      "Matching lost to found items needs meaning, not exact keywords — semantic vector search with a text fallback.",
     ],
     process: [
       {
-        title: "One timeline, many actors",
-        body: "I built a vertical timeline with branching lanes — sponsor, applicant, lawyer, embassy. Each lane owns its own steps; the timeline collapses to a single trunk when there's only one active path.",
+        title: "Local-first so the counter never stops",
+        body: "I built the ops UI on RxDB (IndexedDB) with custom pull/push sync endpoints. Item intake and person-cases are fully readable and writable offline; changes replicate when connectivity returns. Forms try the server first, then silently fall back to local creation on network failure.",
+        artifact: { kind: "image", src: "/projects/reunitar-dark.png" },
+      },
+      {
+        title: "Trustworthy sync and offline auth",
+        body: 'I layered in conflict resolution (automatic server-wins plus a human-in-the-loop merge UI) and a signed session-cache JWT so authentication survives a 24-hour database outage — because at a live event, "the server is down" can\'t mean "stop working."',
+        artifact: { kind: "image", src: "/projects/reunitar-dark.png" },
+      },
+      {
+        title: "Semantic matching, then a leaner backend",
+        body: 'Lost items rarely match found items by exact words ("black hoodie" vs "dark sweatshirt"), so I added vector and hybrid search with a keyword fallback. I then migrated the whole embedding pipeline from PostgreSQL + pgvector + Redis + BullMQ + OpenAI to MongoDB Atlas Automated Embeddings (Voyage AI) — Atlas embeds on write, which removed four moving parts from the backend.',
         artifact: { kind: "image", src: "/projects/reunitar-dark.png" },
       },
     ],
     outcomes: [
-      { number: "1,200+", label: "Families onboarded" },
-      { number: "—54%", label: "Time-to-first-appointment" },
-      { number: "3", label: "Embassies integrated" },
+      { number: "5", label: "Staff roles with scoped, offline-capable access" },
+      {
+        number: "3",
+        label: "Search strategies: vector, hybrid, text fallback",
+      },
+      {
+        number: "−4",
+        label: "Backend services removed in the Atlas migration",
+      },
     ],
     lessons:
-      "Civic-tech UI is logistics dressed as software. Every screen has to survive a 14-month gap and still make sense.",
+      "Designing for genuine offline means distrusting navigator.onLine and treating sync, conflicts, and even auth as first-class offline problems — and managed embeddings (Atlas + Voyage AI) bought that resilience back by removing a whole self-run OpenAI + Redis + BullMQ pipeline.",
+  },
+  {
+    slug: "farmgrow",
+    title: "FarmGrow",
+    descriptor: "AI farming assistant in one chat workspace.",
+    overview:
+      'FarmGrow is an AI farming assistant — a chat workspace that answers questions on crops, soil health, pests, weather, and sustainable farm planning. Built on the Vercel AI SDK with switchable models (Claude, Gemini, GPT), it runs a structured "Agricultural Strategist" persona that returns a consistent diagnosis → yield-gap → integrated-strategy → economics → risk format. I built it full-stack: the XML-driven prompt system, the streaming chat API, a branching conversation model on MongoDB/Prisma, tool-call and token/latency telemetry, shareable sessions, and the UI.',
+    role: "Full-stack",
+    client: "FarmGrow",
+    year: "2026",
+    category: "AI",
+    tags: ["Next.js", "TypeScript", "Vercel AI SDK", "MongoDB", "Prisma"],
+    isLive: true,
+    coverImage: "/projects/farmgrow-dark.png",
+    context:
+      "General-purpose chatbots give farmers vague, unstructured advice. FarmGrow constrains a multi-model LLM into an agricultural-consultant workflow — always reasoning through soil, water, pest pressure, and economics, and always answering in the same actionable structure — so a farmer or extension officer gets decision-ready guidance rather than prose.",
+    constraints: [
+      "Advice must be structured and decision-ready — a strict response schema (diagnosis, yield-gap, integrated strategy, economics, risk) the model can't skip.",
+      "The assistant must not fabricate — grounding, citation, and missing-context-gating rules baked into the prompt files, with a pre-finalize verification loop.",
+      "Conversations need edits and regenerations, not a flat log — messages modelled as a branching tree (parent/child, turn/role ordering).",
+      "Serverless MongoDB cold-starts were adding ~15s per request — removed a redundant `$connect()` and tuned the connection pool.",
+      "One chat surface, multiple model providers (Claude, Gemini, GPT) with per-session config.",
+    ],
+    process: [
+      {
+        title: "Persona as engineered files, not a string",
+        body: "I split the system prompt into versioned XML — identity, knowledge, task, constraints, methodology, response_schema — loaded by a prompt loader, so the agricultural persona and its output contract are maintainable and testable rather than a wall of text. Every answer is forced through the same five sections, with a verification loop that checks soil-health and IPM thresholds before finalizing.",
+        artifact: {
+          kind: "code",
+          body: `// src/prompts/promptLoader.ts — persona assembled from versioned files
+const SYSTEM = [
+  "identity", "knowledge", "task",
+  "constraints", "methodology", "response_schema",
+].map(load).join("\\n\\n");
+// response_schema enforces: diagnosis -> yield_gap_analysis ->
+// integrated_strategy (IPM) -> economic_impact -> risk_mitigation`,
+        },
+      },
+      {
+        title: "A chat backend that remembers structure",
+        body: "I built the streaming chat API on the Vercel AI SDK over a MongoDB/Prisma model with branching messages, persisted tool invocations, per-run token/latency telemetry, auto-generated titles, and shareable sessions — so a conversation is an editable tree, not a flat log.",
+        artifact: {
+          kind: "code",
+          body: `// branching conversation tree (prisma/schema.prisma)
+model Message {
+  turnIndex       Int
+  roleOrder       Int     @default(0)
+  parentMessageId String? @db.ObjectId
+  parentMessage   Message?  @relation("MessageBranch", fields: [parentMessageId], references: [id])
+  children        Message[] @relation("MessageBranch")
+  toolInvocations ToolInvocation[]
+  @@index([sessionId, turnIndex, roleOrder])
+}`,
+        },
+      },
+      {
+        title: "Make it fast and shippable",
+        body: "I traced a ~15s per-request delay to a redundant Prisma $connect() on every query, removed it (Prisma connects lazily on first query) and added connection-pool config — then rounded it out with streaming markdown (code, math, mermaid), SEO/PWA metadata, and dynamic social images.",
+        artifact: {
+          kind: "code",
+          body: `// before: forced a new connection on every request (~15s cold start)
+await prisma.$connect();
+return await action();
+
+// after: Prisma auto-connects lazily on first query
+return await action();`,
+        },
+      },
+    ],
+    outcomes: [
+      { number: "3", label: "LLM providers switchable (Claude, Gemini, GPT)" },
+      { number: "5", label: "Structured sections every answer follows" },
+      { number: "~15s", label: "Per-request DB latency removed" },
+    ],
+    lessons:
+      "Prompt engineering belongs in version-controlled files with an enforced output contract, not a string literal — that's what turns a general LLM into a domain expert you can actually maintain.",
+  },
+  {
+    slug: "heliumid",
+    title: "Helium ID",
+    descriptor:
+      "Enterprise identity verification and digital-identity platform.",
+    overview:
+      'Helium ID is an enterprise identity platform — businesses verify identities in real time (AI ID checks, facial comparison, liveness, NIN lookups), issue customers a digital identity wallet, and authenticate users with MFA and "Login with Helium ID". I built the frontend: the business admin portal — verifications, a developer/API-keys console, events, insights, billing, team, and a multi-step workspace onboarding — and the marketing site, on Next.js with TanStack Query/Table, Zustand, and a server-validated auth layer.',
+    role: "Frontend",
+    client: "Helium ID",
+    year: "2026",
+    category: "Identity",
+    tags: ["Next.js", "TypeScript", "TanStack Query", "Zustand", "shadcn/ui"],
+    isLive: true,
+    coverImage: "/projects/heliumid-dark.png",
+    context:
+      "Enterprises that need to verify customers — banks, fintechs, document platforms — don't want to build identity infrastructure themselves. Helium ID provides verification, a digital-identity wallet, and authentication as a single platform with an admin console and APIs. That means a data-dense operator dashboard for businesses to run verifications, and a polished public site to sell it.",
+    constraints: [
+      "Identity admin is sensitive — sessions are revalidated server-side against the backend on every request, not trusted from a cookie.",
+      "Operators need MFA — dedicated 2FA, OTP, and access auth flows.",
+      "The dashboard is data-heavy — verifications, events, and insights built on TanStack Query + Table with Recharts.",
+      "Businesses self-onboard — a multi-step workspace setup flow gates them into the portal.",
+      "A developer console exposes API keys and integration management as a first-class module.",
+    ],
+    process: [
+      {
+        title: "An operator dashboard for identity ops",
+        body: "I built the admin surface — verifications, events, insights, billing, team — on TanStack Query and Table with Recharts analytics, nuqs-driven URL state for filters and pagination, and Zustand stores for auth and workspace state. Each verification row tracks status (started, successful, failed), method, and the API key that initiated it.",
+        artifact: {
+          kind: "code",
+          body: `// auth state persisted client-side (stores/auth-store.ts)
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      setUser: (user) => set({ user }),
+      clearUser: () => set({ user: null }),
+    }),
+    { name: "auth-store" }
+  )
+);`,
+        },
+      },
+      {
+        title: "Auth treated as the product's spine",
+        body: "For an identity product, trusting a cookie isn't enough. A request proxy revalidates the session against the backend (`/admin/auth/me`) on every navigation, redirects authenticated users away from auth routes, and bounces everyone else to a login that remembers where they were headed. MFA and OTP flows sit on top.",
+        artifact: {
+          kind: "code",
+          body: `// proxy.ts — revalidate the session on every request
+const hasValidSession = async (req: NextRequest) => {
+  const res = await fetch(\`\${apiBaseUrl}/admin/auth/me\`, {
+    headers: { cookie: req.headers.get("cookie") ?? "" },
+    cache: "no-store",
+  });
+  return res.ok;
+};
+// unauthenticated -> /auth/access?from=<pathname>`,
+        },
+      },
+      {
+        title: "Self-serve onboarding + developer console",
+        body: "I built a multi-step workspace setup so businesses provision themselves, and a developers module for API keys and integration management — matching the platform's API-first pitch. I paired it with a Motion-animated, MDX-driven marketing site (shiki-highlighted docs) to sell the product.",
+        artifact: {
+          kind: "code",
+          body: `// middleware matcher — guard the whole app except assets/api
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|icon.svg).*)"],
+};`,
+        },
+      },
+    ],
+    outcomes: [
+      { number: "7", label: "Admin modules across the operator portal" },
+      {
+        number: "4",
+        label: "Verification methods (ID, facial, liveness, NIN)",
+      },
+      { number: "4", label: "Named enterprise customers" },
+    ],
+    lessons:
+      "For an identity product, auth is the product — revalidating sessions server-side and treating MFA as table stakes mattered more than any single screen. And a data-dense operator console lives or dies on its table/query/URL-state layer staying consistent across modules.",
+  },
+  {
+    slug: "paystat",
+    title: "Paystat",
+    descriptor: "Multi-tenant payroll and HR platform.",
+    overview:
+      "Paystat is a multi-tenant payroll and HR platform — companies process payroll, manage employees and attendance, and run reports, each on their own branded subdomain. I built the frontend: 12 modules (payroll, people, attendance, accounts, insights, integrations, workflows, an AI assistant…), an international banking layer that validates account numbers and IBANs across 15+ countries, and an AI-generated organogram rendered on an editable React Flow canvas — on Next.js with Mantine, AG Grid, and TanStack Query.",
+    role: "Frontend",
+    client: "Paystat",
+    year: "2024",
+    category: "HR Tech",
+    tags: ["Next.js", "TypeScript", "Mantine", "AG Grid", "React Flow"],
+    isLive: true,
+    coverImage: "/projects/paystat-dark.png",
+    context:
+      "Payroll spans countries, banking formats, and org structures that differ at every company. Paystat runs each company as a tenant on its own subdomain and handles the messy parts — validating bank accounts across 15+ countries' formats and IBANs, generating and editing org charts, and exporting precise payroll reports — so HR teams can pay people accurately and on time.",
+    constraints: [
+      "Every company is its own tenant — middleware resolves the subdomain, confirms the company exists, and validates the JWT before any page renders.",
+      "Payroll pays people across borders — bank-account and IBAN validation for 15+ countries' formats (sort codes, routing numbers, BSB).",
+      "Org structures must be visual and editable — an AI-generated organogram on a React Flow canvas with drag, reconnect, and export.",
+      "Payroll output must be portable — every report exports to PDF, Excel, CSV, and print.",
+      "Non-technical HR users onboard themselves — guided product tours and live form-format hints.",
+    ],
+    process: [
+      {
+        title: "One app, every tenant",
+        body: "I built subdomain-based multi-tenancy in middleware: extract the company from the host, validate it exists against the backend, then validate the session JWT (`/v1/auth/me`) with conditional auth redirects that remember where the user was headed — so each company gets a branded, isolated workspace from a single deployment.",
+        artifact: {
+          kind: "code",
+          body: `// src/middleware.ts — resolve tenant from the subdomain, then auth
+const subdomain = hostnameParts.length > 2 ? hostnameParts[0] : null;
+const { data: company } = await fetch(
+  \`\${SERVER_URL}/v1/auth/company/check/\${subdomain}\`
+).then((r) => r.json());
+if (!company) return NextResponse.redirect(new URL("/login", request.url));
+
+const token = request.cookies.get("__ps-c-a")?.value;
+if (!token || !(await validateToken(token)))
+  return NextResponse.redirect(new URL(\`/login?redirect=\${path}\`, request.url));`,
+        },
+      },
+      {
+        title: "Get international banking right",
+        body: "Payroll can't fail on a malformed account number. I wrote a country-aware banking-validation layer covering 15+ countries — per-country account formats, IBAN validation, sort codes, routing numbers, BSB — with a debounced account-lookup hook and a live format-helper component that shows the expected format as the user types.",
+        artifact: {
+          kind: "code",
+          body: `// src/lib/utils/bankingValidation.ts — per-country formats + IBAN
+validateAccountNumber("DE89370400440532013000", "DE"); // IBAN
+validateAccountNumber("0123456789", "NG");              // 10-digit
+validateAccountNumber("12345678", "GB");                // 8-digit + sort code
+// supports NG, US, GB, DE, FR, CA, AU … (15+ countries)`,
+        },
+      },
+      {
+        title: "Make org structure and payroll tangible",
+        body: "I built an AI-generated organogram: a prompt-to-org-chart route in the app renders onto a React Flow canvas where HR can drag, reconnect, and export the chart, with positions and units CRUD and reorderable approval workflows behind it. I paired it with a heavy export layer so every payroll report ships as PDF, Excel, CSV, or print.",
+        artifact: {
+          kind: "code",
+          body: `// AI org-chart generation stays in the Next.js app
+// src/app/api/organogram/generate/route.ts -> React Flow canvas
+// backend owns persistence only: save/retrieve chart, positions &
+// units CRUD, approval-workflow ordering`,
+        },
+      },
+    ],
+    outcomes: [
+      { number: "12", label: "Modules across the workforce platform" },
+      { number: "15+", label: "Countries for bank-account / IBAN validation" },
+      { number: "1", label: "Branded subdomain per tenant company" },
+    ],
+    lessons:
+      "Subdomain multi-tenancy lives in the middleware — get tenant resolution and session validation right there and every module inherits isolation for free. And the long tail of international banking formats is real work: 'validate an account number' means 15 different rules, not one.",
   },
 ];
 
