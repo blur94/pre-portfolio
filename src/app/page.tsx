@@ -1,3 +1,4 @@
+import { Temporal } from "temporal-polyfill";
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 
@@ -11,6 +12,7 @@ import { works } from "@/lib/works";
 
 export default function Home() {
   const selectedWorks = works.slice(0, 3);
+  const yearsBuilding = Temporal.Now.plainDateISO().year - 2020;
 
   return (
     <>
@@ -34,7 +36,9 @@ export default function Home() {
                   color: "var(--text-primary)",
                 }}
               >
-                <span style={{ color: "var(--text-muted)" }}>Hi there, I&rsquo;m </span>
+                <span style={{ color: "var(--text-muted)" }}>
+                  Hi there, I&rsquo;m{" "}
+                </span>
                 Gilead Odo.
               </h1>
 
@@ -46,7 +50,8 @@ export default function Home() {
                   maxWidth: "22ch",
                 }}
               >
-                I build operator-grade web platforms for African fintechs, regtechs, and the boring parts of the stack.
+                I build operator-grade web platforms for African fintechs,
+                regtechs, and the boring parts of the stack.
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5">
@@ -139,8 +144,14 @@ export default function Home() {
           style={{ maxWidth: "var(--container-max, 1440px)" }}
         >
           <div className="grid grid-cols-1 gap-10 text-center md:grid-cols-3 md:gap-16">
-            <CountStat number="6+" label="Years building for the web" />
-            <CountStat number="12" label="Projects shipped end-to-end" />
+            <CountStat
+              number={`${yearsBuilding}+`}
+              label="Years building for the web"
+            />
+            <CountStat
+              number={String(works.length)}
+              label="Projects shipped end-to-end"
+            />
             <CountStat number="8" label="Repeat clients" />
           </div>
         </div>
@@ -178,7 +189,10 @@ export default function Home() {
                   maxWidth: "65ch",
                 }}
               >
-                Most of my work is taking a process someone already does in spreadsheets and turning it into a screen that gets out of their way. Operator surfaces, billing primitives, compliance loops — the layer where the interesting decisions hide.
+                Most of my work is taking a process someone already does in
+                spreadsheets and turning it into a screen that gets out of their
+                way. Operator surfaces, billing primitives, compliance loops —
+                the layer where the interesting decisions hide.
               </p>
 
               <p
@@ -189,7 +203,8 @@ export default function Home() {
                   maxWidth: "65ch",
                 }}
               >
-                I keep a tight type system, two or three colours, and resist anything decorative that hasn&rsquo;t earned its place.
+                I keep a tight type system, two or three colours, and resist
+                anything decorative that hasn&rsquo;t earned its place.
               </p>
 
               <Button
@@ -211,7 +226,7 @@ export default function Home() {
             {/* Right — image placeholder */}
             <figure className="m-0">
               <div
-                className="aspect-video w-full rounded-2xl bg-cover bg-center md:aspect-[4/5]"
+                className="aspect-video w-full rounded-2xl bg-cover bg-center md:aspect-4/5"
                 style={{
                   backgroundImage: "url('/projects/raia-dark.png')",
                   backgroundColor: "var(--bg-surface)",
