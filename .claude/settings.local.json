@@ -35,7 +35,24 @@
       "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\hp\\\\Downloads\\\\Portfolio-handoff\\\\portfolio\\\\project\\\\assets\\\\' -Recurse | Select-Object FullName\")",
       "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\hp\\\\Codes\\\\personal\\\\pre-portfolio\\\\public\\\\' -Recurse | Select-Object FullName\")",
       "Bash(ls \"C:/Users/hp/.claude/agents/\")",
-      "Bash(pnpm lint *)"
+      "Bash(pnpm lint *)",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "PowerShell(Copy-Item *)",
+      "WebFetch(domain:admin-qatapolt.vercel.app)",
+      "WebSearch",
+      "WebFetch(domain:www.qatapolt.com)",
+      "Bash(/c/Users/hp/.claude/skills/gstack/browse/dist/browse cookie-import-browser *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh api *)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\hp\\\\Claude Workspace\\\\works-research\\\\screenshots\")",
+      "Bash(ls \"C:\\\\Users\\\\hp\\\\Claude Workspace\\\\works-research\\\\\" 2>&1 || echo \"DIR_NOT_EXISTS\")",
+      "Bash(pnpm tsc *)",
+      "Bash(mkdir -p \"C:/Users/hp/Claude Workspace/works-research/screenshots\")",
+      "Bash(echo \"\" > \"C:/Users/hp/Claude Workspace/works-research/qatapolt.md\")",
+      "WebFetch(domain:apas.prunepayments.net)",
+      "WebFetch(domain:responsibleai.africa)",
+      "WebFetch(domain:raia-nu.vercel.app)"
     ]
   }
 }
