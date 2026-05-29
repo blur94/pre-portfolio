@@ -120,17 +120,17 @@ export const works: Work[] = [
       {
         title: "Separating operator and guest surfaces",
         body: "The platform serves two fundamentally different users — landlords managing their portfolio and guests booking short-lets. I separated these into distinct route groups: (landlord) for the authenticated operator dashboard and (public) for guest-facing property listings and booking pages. The split gave each surface its own layout, auth logic, and data loading strategy without the two leaking into each other.",
-        artifact: { kind: "image", src: "/projects/recurrent.png" },
+        artifact: { kind: "image", src: "/projects/recurrent-banking.png" },
       },
       {
         title: "A booking calendar that understands availability",
         body: "Short-let and hotel bookings require per-unit availability tracking across multiple days, with OTA channel sync to prevent double-bookings. I built the calendar view on Schedule-X, wiring it to the booking state layer. Each day cell reflects which units are available, occupied, or pending — without the operator needing to cross-reference a separate list.",
-        artifact: { kind: "image", src: "/projects/recurrent.png" },
+        artifact: { kind: "image", src: "/projects/recurrent-shortlets.png" },
       },
       {
         title: "PDF generation for documents with legal weight",
         body: "Tenancy agreements and invoices aren't just exports — they're legally binding documents tenants sign and landlords store for years. No single PDF library handled both structured agreement layout and invoice snapshot fidelity well, so I used react-pdf/renderer for agreements and jspdf + html2canvas for invoices. The output matches exactly what's on screen.",
-        artifact: { kind: "image", src: "/projects/recurrent.png" },
+        artifact: { kind: "image", src: "/projects/recurrent-invoices.png" },
       },
     ],
     outcomes: [
