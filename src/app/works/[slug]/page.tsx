@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { Button } from "@/components/ui/button";
 import { CountStat } from "@/components/CountStat";
 import type { WorkArtifact } from "@/lib/works";
 import { nextOf, works } from "@/lib/works";
@@ -15,6 +17,8 @@ type WorkPageProps = {
 type KeyValue = {
   label: string;
   value: string;
+  href?: string;
+  gated?: boolean;
 };
 
 export function generateStaticParams() {
@@ -46,7 +50,12 @@ export default async function WorkView({ params }: WorkPageProps) {
     { label: "Client", value: work.client },
     { label: "Year", value: work.year },
     { label: "Category", value: work.category },
-    { label: "Status", value: work.isLive ? "Live project" : "Private build" },
+    {
+      label: "Status",
+      value: work.isLive ? "Live project" : "Private build",
+      href: work.liveUrl,
+      gated: work.liveUrlGated,
+    },
   ];
   const roleItems: KeyValue[] = [
     { label: "Role", value: work.role },
@@ -78,6 +87,30 @@ export default async function WorkView({ params }: WorkPageProps) {
               <p className="mt-8 max-w-3xl text-xl leading-[1.45] tracking-[-0.04em] text-muted-foreground md:text-2xl">
                 {work.overview}
               </p>
+              {work.liveUrl ? (
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <Button
+                    render={
+                      <a
+                        href={work.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      />
+                    }
+                    nativeButton={false}
+                    className="inline-flex items-center gap-2"
+                    style={{ height: 48, paddingInline: 24, fontSize: 15 }}
+                  >
+                    Visit project
+                    <ArrowUpRight size={18} aria-hidden="true" />
+                  </Button>
+                  {work.liveUrlGated ? (
+                    <span className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                      Login required
+                    </span>
+                  ) : null}
+                </div>
+              ) : null}
             </div>
 
             <dl className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
@@ -229,14 +262,33 @@ function SectionKicker({ children }: { children: ReactNode }) {
   );
 }
 
-function KeyValueRow({ label, value }: KeyValue) {
+function KeyValueRow({ label, value, href, gated }: KeyValue) {
   return (
     <div className="bg-background p-5">
       <dt className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
         {label}
       </dt>
       <dd className="mt-3 text-lg font-medium tracking-[-0.04em] text-foreground">
-        {value}
+        {href ? (
+          <span className="flex flex-wrap items-center gap-2">
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 underline-offset-4 hover:underline"
+            >
+              {value}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+            {gated ? (
+              <span className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                Login required
+              </span>
+            ) : null}
+          </span>
+        ) : (
+          value
+        )}
       </dd>
     </div>
   );

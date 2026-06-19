@@ -91,7 +91,7 @@ export function Footer() {
         {/* 3-column: wordmark | nav links | social icons */}
         <div className="grid grid-cols-1 gap-8 py-12 md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-12 md:py-16 md:pb-8">
           {/* Left — wordmark */}
-          <Logo asLink />
+          <Logo asLink iconClassName="h-10 w-10" />
 
           {/* Center — nav links */}
           <nav

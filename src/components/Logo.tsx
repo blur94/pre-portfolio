@@ -38,10 +38,7 @@ function LogoContent({
 }: Pick<LogoProps, "iconClassName" | "className">) {
   return (
     <span
-      className={cn(
-        "flex items-center gap-2",
-        className,
-      )}
+      className={cn("flex items-center gap-1", className)}
       style={{ color: "var(--text-primary)" }}
     >
       <Mark className={cn("h-6 w-6", iconClassName)} />
@@ -59,7 +56,11 @@ function LogoContent({
 export function Logo({ className, iconClassName, asLink = false }: LogoProps) {
   if (asLink) {
     return (
-      <Link href="/" aria-label="Gilead Odo — home" className="flex min-h-[44px] items-center">
+      <Link
+        href="/"
+        aria-label="Gilead Odo — home"
+        className="flex min-h-11 items-center"
+      >
         <LogoContent className={className} iconClassName={iconClassName} />
       </Link>
     );

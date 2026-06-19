@@ -1,39 +1,59 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
-  Atom,
-  Blocks,
-  Brush,
-  Cloud,
-  Code2,
-  Database,
-  Globe2,
-  Plug,
-  Server,
-  SquareTerminal,
-  Triangle,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
+  siReact,
+  siNextdotjs,
+  siTypescript,
+  siMantine,
+  siTailwindcss,
+  siPostgresql,
+  siVercel,
+  siCloudflare,
+  siFigma,
+  siNodedotjs,
+  siShadcnui,
+  siReactquery,
+  SimpleIcon,
+} from "simple-icons";
 
-const items: { icon: LucideIcon; label: string }[] = [
-  { icon: Atom, label: "React" },
-  { icon: Zap, label: "Next.js" },
-  { icon: Code2, label: "TypeScript" },
-  { icon: Blocks, label: "Mantine" },
-  { icon: Triangle, label: "Tailwind" },
-  { icon: Database, label: "PostgreSQL" },
-  { icon: Cloud, label: "Vercel" },
-  { icon: Plug, label: "Paystack" },
-  { icon: Server, label: "shadcn" },
-  { icon: SquareTerminal, label: "Node.js" },
-  { icon: Brush, label: "Figma" },
-  { icon: Globe2, label: "Cloudflare" },
+const items: { icon: SimpleIcon; label: string }[] = [
+  { icon: siReact, label: "React" },
+  { icon: siNextdotjs, label: "Next.js" },
+  { icon: siTypescript, label: "TypeScript" },
+  { icon: siMantine, label: "Mantine" },
+  { icon: siTailwindcss, label: "Tailwind" },
+  { icon: siPostgresql, label: "PostgreSQL" },
+  { icon: siVercel, label: "Vercel" },
+  { icon: siReactquery, label: "React Query" },
+  { icon: siShadcnui, label: "shadcn" },
+  { icon: siNodedotjs, label: "Node.js" },
+  { icon: siFigma, label: "Figma" },
+  { icon: siCloudflare, label: "Cloudflare" },
 ];
 
-const loopItems = [...items, ...items, ...items];
+const loopItems = [...items, ...items, ...items, ...items];
 
 export function Marquee() {
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    const updateTheme = () => {
+      setTheme(document.documentElement.getAttribute("data-theme") || "dark");
+    };
+
+    updateTheme();
+
+    const observer = new MutationObserver(updateTheme);
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden border-y py-14"
@@ -48,7 +68,13 @@ export function Marquee() {
     >
       <div className="animate-marquee flex w-max gap-[72px] whitespace-nowrap [animation-play-state:running] hover:[animation-play-state:paused]">
         {loopItems.map((item, index) => {
-          const Icon = item.icon;
+          const color =
+            item.icon.hex === "000000"
+              ? theme === "dark"
+                ? "#FFFFFF"
+                : "#000000"
+              : `#${item.icon.hex}`;
+
           return (
             <span
               key={`${item.label}-${index}`}
@@ -58,7 +84,16 @@ export function Marquee() {
                 color: "var(--misc-icon-stroke)",
               }}
             >
-              <Icon size={28} aria-hidden="true" />
+              <svg
+                role="img"
+                viewBox="0 0 24 24"
+                width={28}
+                height={28}
+                // fill="currentColor"
+                fill={color}
+                dangerouslySetInnerHTML={{ __html: item.icon.svg }}
+                aria-hidden="true"
+              />
               {item.label}
             </span>
           );

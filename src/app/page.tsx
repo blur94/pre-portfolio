@@ -83,7 +83,7 @@ export default function Home() {
 
             {/* Right — browser frame */}
             <BrowserFrame
-              src="/projects/verivafrica.png"
+              src="/projects/verivafrica/cover.png"
               imageAlt="VerivAfrica dashboard, partner view"
               url="verivafrica.com / dashboard"
             />
@@ -228,7 +228,7 @@ export default function Home() {
               <div
                 className="aspect-video w-full rounded-2xl bg-cover bg-center md:aspect-4/5"
                 style={{
-                  backgroundImage: "url('/projects/raia-dark.png')",
+                  backgroundImage: "url('/projects/raia/cover.png')",
                   backgroundColor: "var(--bg-surface)",
                 }}
                 role="img"

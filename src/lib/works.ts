@@ -24,6 +24,10 @@ export type Work = {
   category: string;
   tags: string[];
   isLive: boolean;
+  /** Public URL to visit the live project, when one exists. */
+  liveUrl?: string;
+  /** True when liveUrl lands on a login wall (a gated app or admin). */
+  liveUrlGated?: boolean;
   coverImage: string;
   context: string;
   constraints: string[];
@@ -46,7 +50,8 @@ export const works: Work[] = [
     category: "Media",
     tags: ["Next.js", "Mantine", "Sanity", "TypeScript", "Framer Motion"],
     isLive: true,
-    coverImage: "/projects/verivafrica.png",
+    liveUrl: "https://verivafrica.com",
+    coverImage: "/projects/verivafrica/cover.png",
     context:
       "Nigerian decision-makers — businesses, investors, policymakers — lacked a trusted, data-grounded platform for rigorous economic and political analysis. The team had the research and the contributors; the missing piece was a frontend that made that content feel credible, readable, and worth returning to.",
     constraints: [
@@ -58,12 +63,12 @@ export const works: Work[] = [
       {
         title: "Content architecture before components",
         body: "The publishing flow had to scale across reports, insights, and category pages before the first screen was built. I mapped the content types coming from Contentful and Sanity and established the layout contracts each would need — column widths, typographic rhythm, spacing scale — before writing a component.",
-        artifact: { kind: "image", src: "/projects/verivafrica.png" },
+        artifact: { kind: "image", src: "/projects/verivafrica/cover.png" },
       },
       {
         title: "Pushing Mantine past its dashboard defaults",
         body: "Mantine defaults toward data-dense UIs. A long-form editorial platform needs something different — tighter leading, wider measure, quieter chrome. I reworked the typographic and spacing system to read well at depth while keeping the component library consistent and maintainable underneath.",
-        artifact: { kind: "image", src: "/projects/verivafrica.png" },
+        artifact: { kind: "image", src: "/projects/verivafrica/cover.png" },
       },
       {
         title: "Motion that earns its place",
@@ -87,7 +92,7 @@ export const works: Work[] = [
       },
     ],
     outcomes: [
-      { number: "Feb 2024", label: "Platform launch" },
+      { number: "02/2024", label: "Platform launch" },
       { number: "3", label: "Content types: articles, reports, insights" },
       { number: "10+", label: "Thematic categories at launch" },
     ],
@@ -107,7 +112,8 @@ export const works: Work[] = [
     category: "PropTech",
     tags: ["Next.js", "Mantine", "TypeScript", "TanStack Query", "Socket.io"],
     isLive: true,
-    coverImage: "/projects/recurrent.png",
+    liveUrl: "https://recurrent.ng",
+    coverImage: "/projects/recurrent/cover.png",
     context:
       "Landlords and property managers were running their operations across disconnected tools — separate invoicing software, manual KYC, paper tenancy agreements, and no unified view of bookings or payments. re:current consolidates the full property workflow into one platform, from tenant onboarding and verification to rent collection, short-let bookings, and digital agreements.",
     constraints: [
@@ -120,17 +126,17 @@ export const works: Work[] = [
       {
         title: "Separating operator and guest surfaces",
         body: "The platform serves two fundamentally different users — landlords managing their portfolio and guests booking short-lets. I separated these into distinct route groups: (landlord) for the authenticated operator dashboard and (public) for guest-facing property listings and booking pages. The split gave each surface its own layout, auth logic, and data loading strategy without the two leaking into each other.",
-        artifact: { kind: "image", src: "/projects/recurrent-banking.png" },
+        artifact: { kind: "image", src: "/projects/recurrent/banking.png" },
       },
       {
         title: "A booking calendar that understands availability",
         body: "Short-let and hotel bookings require per-unit availability tracking across multiple days, with OTA channel sync to prevent double-bookings. I built the calendar view on Schedule-X, wiring it to the booking state layer. Each day cell reflects which units are available, occupied, or pending — without the operator needing to cross-reference a separate list.",
-        artifact: { kind: "image", src: "/projects/recurrent-shortlets.png" },
+        artifact: { kind: "image", src: "/projects/recurrent/shortlets.png" },
       },
       {
         title: "PDF generation for documents with legal weight",
         body: "Tenancy agreements and invoices aren't just exports — they're legally binding documents tenants sign and landlords store for years. No single PDF library handled both structured agreement layout and invoice snapshot fidelity well, so I used react-pdf/renderer for agreements and jspdf + html2canvas for invoices. The output matches exactly what's on screen.",
-        artifact: { kind: "image", src: "/projects/recurrent-invoices.png" },
+        artifact: { kind: "image", src: "/projects/recurrent/invoice.png" },
       },
     ],
     outcomes: [
@@ -139,7 +145,7 @@ export const works: Work[] = [
       { number: "3", label: "Property modes: rentals, short-lets, sales" },
     ],
     lessons:
-      "Building re:current taught me a lot about designing software around real operational behavior instead of ideal user flows. Property management looks straightforward on the surface, but once tenants, landlords, payments, agreements, reminders, and verification workflows interact, the edge cases multiply quickly. I learned the importance of building flexible systems that can handle incomplete states, delayed actions, and constantly changing business rules without making the UI feel chaotic. The project also deepened my understanding of trust-driven product design. Features like recurring payments, tenancy agreements, and tenant verification carry financial and legal weight, so clarity became more important than visual complexity. I became more intentional about reducing friction, communicating system states clearly, and designing interfaces that helped users feel confident about important actions. Technically, it reinforced the value of scalable frontend architecture. Managing large forms, nested workflows, async payment states, and reusable dashboard components taught me how important predictable state management, strong typing, and modular UI systems are as products grow.",
+      "Building re:current taught me that real operational workflows are rarely linear. Payments, agreements, bookings, and verification all interact in ways that create edge cases quickly. The challenge was not building the happy path but creating a system that stayed understandable when those exceptions appeared. It made me more intentional about designing for clarity, flexibility, and change.",
   },
   {
     slug: "qatapolt",
@@ -153,7 +159,9 @@ export const works: Work[] = [
     category: "Sports",
     tags: ["Next.js", "TypeScript", "Mantine", "Recharts", "Zustand"],
     isLive: true,
-    coverImage: "/projects/qatapolt.png",
+    liveUrl: "https://admin-qatapolt.vercel.app",
+    liveUrlGated: true,
+    coverImage: "/projects/qatapolt/cover.png",
     context:
       "The sports community launched with user-reported content and conduct issues spread across manual processes. The ops team needed a unified admin surface to track platform health — downloads, users, posts — moderate reported content and users, manage the news feed, and act on account escalations, all without pulling in engineering.",
     constraints: [
@@ -166,12 +174,12 @@ export const works: Work[] = [
       {
         title: "A dashboard that reads at a glance",
         body: "The landing surface answers the operator's first three questions immediately — how many downloads, posts, and users — then breaks the user base down by age, gender, and country. Server Actions fetch metrics and visitors with the session token forwarded from cookies; the data is passed straight to Mantine donut charts and a paginated visitor table tagged by sport.",
-        artifact: { kind: "image", src: "/projects/qatapolt.png" },
+        artifact: { kind: "image", src: "/projects/qatapolt/cover.png" },
       },
       {
         title: "Moderation as a queue, not a hunt",
         body: "Reported users and posts arrive with everything an operator needs to decide: category (harassment, spam, fraud, impersonation), reason, reporter, and status. The job wasn't displaying the reports — it was removing every extra click between seeing a problem and resolving it, so block and delete actions live inline.",
-        artifact: { kind: "image", src: "/projects/qatapolt.png" },
+        artifact: { kind: "image", src: "/projects/qatapolt/cover.png" },
       },
       {
         title: "Forwarding auth through every Server Action",
@@ -210,7 +218,9 @@ export const getDashMetrics = async () => {
     category: "Fintech",
     tags: ["Next.js", "TypeScript", "Mantine", "AG Grid", "Zustand"],
     isLive: true,
-    coverImage: "/projects/prune.png",
+    liveUrl: "https://apas.prunepayments.net",
+    liveUrlGated: true,
+    coverImage: "/projects/prune/cover.png",
     context:
       "Businesses that want to offer banking features rarely want to become a bank. Prune provides the account-issuing, payout, and transaction rails as a service, so a business can spin up multi-currency accounts and move money under their own brand. That demands two very different surfaces — a self-serve operator dashboard for the business, and an internal admin console for Prune to vet and manage those businesses.",
     constraints: [
@@ -223,17 +233,17 @@ export const getDashMetrics = async () => {
       {
         title: "Two surfaces, one codebase",
         body: "The platform serves two fundamentally different users — businesses operating their own accounts, and Prune staff vetting those businesses. I separated them into distinct Next.js route groups, each with its own layout, navigation, and permission model, so operator and staff flows never leak into each other.",
-        artifact: { kind: "image", src: "/projects/prune-customer.png" },
+        artifact: { kind: "image", src: "/projects/prune/customer.png" },
       },
       {
         title: "Permissions as a first-class concern",
         body: "Money movement needs guardrails. I built RBAC around an initiator/approver pattern: a useHasPermission hook gates every sensitive action — transaction initiation, approvals — so the same UI adapts to each team member's role rather than hiding logic behind a single admin flag.",
-        artifact: { kind: "image", src: "/projects/prune.png" },
+        artifact: { kind: "image", src: "/projects/prune/cover.png" },
       },
       {
         title: "Multi-currency accounts and money movement",
         body: "Each account carries its own real banking identifiers — IBAN, Sort Code, ACH Routing — across EUR, GBP, and USD, with per-currency transaction views, payouts, and downloadable statements. Receipts and statements are generated client-side as PDF and exported to Excel, matching exactly what's on screen.",
-        artifact: { kind: "image", src: "/projects/prune.png" },
+        artifact: { kind: "image", src: "/projects/prune/customer.png" },
       },
     ],
     outcomes: [
@@ -256,7 +266,8 @@ export const getDashMetrics = async () => {
     category: "Civic Tech",
     tags: ["Next.js", "TypeScript", "Payload CMS", "Mantine", "MongoDB"],
     isLive: true,
-    coverImage: "/projects/raia-dark.png",
+    liveUrl: "https://responsibleai.africa",
+    coverImage: "/projects/raia/cover.png",
     context:
       "Africa's responsible-AI ecosystem — the people, funders, events, initiatives, and country-level policy landscape — was scattered across PDFs, mailing lists, and social posts. Raia centralises it into one searchable, continuously-updated hub that a non-technical editorial team can run themselves, while the public site stays fast and current.",
     constraints: [
@@ -269,17 +280,17 @@ export const getDashMetrics = async () => {
       {
         title: "Model the ecosystem, then build the screens",
         body: "I defined the Payload collections — directories, funding, events, jobs, insights, international initiatives, countries — and the relationships between them before building the public UI. Getting the content model right first gave the editorial team a coherent system to fill instead of a pile of disconnected pages.",
-        artifact: { kind: "image", src: "/projects/raia-admin.png" },
+        artifact: { kind: "image", src: "/projects/raia/countries.png" },
       },
       {
         title: "Editing without engineering",
         body: "The editorial team can't wait for a deploy to publish. I wired on-demand revalidation hooks into the collections so a single Payload edit invalidates exactly the affected pages — content goes live in seconds, with no redeploy and no stale cache.",
-        artifact: { kind: "image", src: "/projects/raia-light.png" },
+        artifact: { kind: "image", src: "/projects/raia/admin.png" },
       },
       {
         title: "Email as an outbox, not fire-and-forget",
         body: "Newsletter and contact flows can't silently drop messages. Rather than calling the email provider and hoping, I modelled an EmailOutbox collection so every transactional send is persisted, inspectable, and retryable — a queue you can audit instead of a side effect you can't.",
-        artifact: { kind: "image", src: "/projects/raia-light.png" },
+        artifact: { kind: "image", src: "/projects/raia/light.png" },
       },
     ],
     outcomes: [
@@ -310,7 +321,7 @@ export const getDashMetrics = async () => {
       "shadcn/ui",
     ],
     isLive: false,
-    coverImage: "/projects/reunitar-dark.png",
+    coverImage: "/projects/reunitar/cover.png",
     context:
       "Lost-and-found at a big convention is a logistics problem: thousands of items, rotating volunteer staff, anxious attendees, and notoriously unreliable venue Wi-Fi. Reunitar gives staff a single operations workspace that keeps running offline, matches found items to missing reports by meaning rather than exact keywords, and gives supervisors coverage alerts and post-event reporting.",
     constraints: [
@@ -324,17 +335,17 @@ export const getDashMetrics = async () => {
       {
         title: "Local-first so the counter never stops",
         body: "I built the ops UI on RxDB (IndexedDB) with custom pull/push sync endpoints. Item intake and person-cases are fully readable and writable offline; changes replicate when connectivity returns. Forms try the server first, then silently fall back to local creation on network failure.",
-        artifact: { kind: "image", src: "/projects/reunitar-dark.png" },
+        artifact: { kind: "image", src: "/projects/reunitar/cover.png" },
       },
       {
         title: "Trustworthy sync and offline auth",
         body: 'I layered in conflict resolution (automatic server-wins plus a human-in-the-loop merge UI) and a signed session-cache JWT so authentication survives a 24-hour database outage — because at a live event, "the server is down" can\'t mean "stop working."',
-        artifact: { kind: "image", src: "/projects/reunitar-dark.png" },
+        artifact: { kind: "image", src: "/projects/reunitar/cover.png" },
       },
       {
         title: "Semantic matching, then a leaner backend",
         body: 'Lost items rarely match found items by exact words ("black hoodie" vs "dark sweatshirt"), so I added vector and hybrid search with a keyword fallback. I then migrated the whole embedding pipeline from PostgreSQL + pgvector + Redis + BullMQ + OpenAI to MongoDB Atlas Automated Embeddings (Voyage AI) — Atlas embeds on write, which removed four moving parts from the backend.',
-        artifact: { kind: "image", src: "/projects/reunitar-dark.png" },
+        artifact: { kind: "image", src: "/projects/reunitar/cover.png" },
       },
     ],
     outcomes: [
@@ -363,7 +374,8 @@ export const getDashMetrics = async () => {
     category: "AI",
     tags: ["Next.js", "TypeScript", "Vercel AI SDK", "MongoDB", "Prisma"],
     isLive: true,
-    coverImage: "/projects/farmgrow-dark.png",
+    liveUrl: "https://farmgrow.vercel.app",
+    coverImage: "/projects/farmgrow/cover.png",
     context:
       "General-purpose chatbots give farmers vague, unstructured advice. FarmGrow constrains a multi-model LLM into an agricultural-consultant workflow — always reasoning through soil, water, pest pressure, and economics, and always answering in the same actionable structure — so a farmer or extension officer gets decision-ready guidance rather than prose.",
     constraints: [
@@ -440,7 +452,8 @@ return await action();`,
     category: "Identity",
     tags: ["Next.js", "TypeScript", "TanStack Query", "Zustand", "shadcn/ui"],
     isLive: true,
-    coverImage: "/projects/heliumid-dark.png",
+    liveUrl: "https://heliumid.io",
+    coverImage: "/projects/heliumid/cover.png",
     context:
       "Enterprises that need to verify customers — banks, fintechs, document platforms — don't want to build identity infrastructure themselves. Helium ID provides verification, a digital-identity wallet, and authentication as a single platform with an admin console and APIs. That means a data-dense operator dashboard for businesses to run verifications, and a polished public site to sell it.",
     constraints: [
@@ -454,20 +467,7 @@ return await action();`,
       {
         title: "An operator dashboard for identity ops",
         body: "I built the admin surface — verifications, events, insights, billing, team — on TanStack Query and Table with Recharts analytics, nuqs-driven URL state for filters and pagination, and Zustand stores for auth and workspace state. Each verification row tracks status (started, successful, failed), method, and the API key that initiated it.",
-        artifact: {
-          kind: "code",
-          body: `// auth state persisted client-side (stores/auth-store.ts)
-export const useAuthStore = create<AuthState>()(
-  persist(
-    (set) => ({
-      user: null,
-      setUser: (user) => set({ user }),
-      clearUser: () => set({ user: null }),
-    }),
-    { name: "auth-store" }
-  )
-);`,
-        },
+        artifact: { kind: "image", src: "/projects/heliumid/light.png" },
       },
       {
         title: "Auth treated as the product's spine",
@@ -520,7 +520,8 @@ export const config = {
     category: "HR Tech",
     tags: ["Next.js", "TypeScript", "Mantine", "AG Grid", "React Flow"],
     isLive: true,
-    coverImage: "/projects/paystat-dark.png",
+    liveUrl: "https://paystat.dev",
+    coverImage: "/projects/paystat/cover.png",
     context:
       "Payroll spans countries, banking formats, and org structures that differ at every company. Paystat runs each company as a tenant on its own subdomain and handles the messy parts — validating bank accounts across 15+ countries' formats and IBANs, generating and editing org charts, and exporting precise payroll reports — so HR teams can pay people accurately and on time.",
     constraints: [

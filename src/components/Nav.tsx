@@ -29,7 +29,8 @@ export function Nav() {
 
   const toggleTheme = () => {
     const root = document.documentElement;
-    const current = root.getAttribute("data-theme") === "light" ? "light" : "dark";
+    const current =
+      root.getAttribute("data-theme") === "light" ? "light" : "dark";
     const next = current === "dark" ? "light" : "dark";
 
     root.setAttribute("data-theme", next);
@@ -38,17 +39,13 @@ export function Nav() {
     localStorage.setItem("theme", next);
   };
 
-  // Determine active link:
-  // "/" and "/works" and "/works/[slug]" all make "Work" active
-  const isWorkActive =
-    pathname === "/" ||
-    pathname === "/works" ||
-    pathname.startsWith("/works/");
-
+  // Determine active link: exact match for home, prefix match for sections
+  // (so "/works" is active on "/works" and "/works/[slug]"). The trailing
+  // slash in startsWith prevents "/works" matching e.g. "/works-archive".
   const isActive = (href: string | null): boolean => {
     if (!href) return false;
-    if (href === "/works") return isWorkActive;
-    return pathname === href;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
@@ -60,21 +57,18 @@ export function Nav() {
       }}
     >
       <div
-        className="mx-auto flex h-[72px] items-center justify-between px-6 md:px-12"
+        className="mx-auto flex h-18 items-center justify-between px-6 md:px-12"
         style={{
           maxWidth: "var(--container-max, 1440px)",
         }}
       >
         {/* Left — wordmark */}
         <div className="flex flex-1 items-center">
-          <Logo asLink />
+          <Logo asLink iconClassName="h-10 w-10" />
         </div>
 
         {/* Center — nav links */}
-        <nav
-          className="hidden items-center gap-1 md:flex"
-          aria-label="Primary"
-        >
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
           {navLinks.map((link) => {
             const active = isActive(link.href);
             return (
@@ -264,13 +258,23 @@ export function Nav() {
                     color: "var(--text-muted, var(--muted-foreground))",
                   }}
                 >
-                  <Sun className="theme-toggle__sun" size={16} aria-hidden="true" />
-                  <Moon className="theme-toggle__moon" size={16} aria-hidden="true" />
+                  <Sun
+                    className="theme-toggle__sun"
+                    size={16}
+                    aria-hidden="true"
+                  />
+                  <Moon
+                    className="theme-toggle__moon"
+                    size={16}
+                    aria-hidden="true"
+                  />
                 </button>
               </div>
 
               <Button
-                render={<Link href="/works" onClick={() => setMobileOpen(false)} />}
+                render={
+                  <Link href="/works" onClick={() => setMobileOpen(false)} />
+                }
                 nativeButton={false}
                 className="mt-4 w-full items-center gap-1.5"
                 style={{ height: 48, fontSize: 14 }}

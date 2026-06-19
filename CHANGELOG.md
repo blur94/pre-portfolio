@@ -7,6 +7,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
+### QA Session — 2026-05-29 ("Visit project" link for live works)
+
+**Agents employed:** `plinth-data-assets-integrator` (Phase 1 — data), `plinth-page-assembler` (Phase 2 — UI)
+**Routing:** Parallel sub-agents (shared `Work.liveUrl` / `liveUrlGated` contract already materialized in code).
+**Rework cycles:** None — both phases passed first-pass QA.
+
+**Phase summaries:**
+- Phase 1: Populated `liveUrl` on every live entry in `src/lib/works.ts` — 6 public (verivafrica, recurrent, raia, farmgrow, heliumid, paystat) and 2 gated with `liveUrlGated: true` (qatapolt, prune). `reunitar` (`isLive: false`) left without a `liveUrl`. No live-link fields touched beyond the contract.
+- Phase 2: Added a "Visit project ↗" affordance to `src/app/works/[slug]/page.tsx`. Hero renders a shadcn `Button` via `render={<a target="_blank" rel="noreferrer" />}` + `nativeButton={false}` with a lucide `ArrowUpRight`; masthead Status row links to `liveUrl` with an `ArrowUpRight` indicator (plain text otherwise). Gated works show a "Login required" hint in both spots. `KeyValue` extended with optional `href` / `gated`.
+
+**QA verdict: APPROVED** — all Phase 1 and Phase 2 acceptance criteria met. Independent `pnpm lint` and `pnpm build` both pass with zero errors; no `asChild` usage in source; no stray inline colors introduced by the visit-link UI.
+
+**Observation (Parking Lot, not a task defect):** `heliumid` `coverImage` still points at the deleted flat path `/projects/heliumid-dark.png` (correct path is `/projects/heliumid/cover.png`). This predates the live-link task (unchanged at HEAD) and is outside its scope.
+
+---
+
 ### QA Session — 2026-05-24 (Mobile responsive stacking for side-by-side image sections)
 
 **Agents employed:** `ui-stylist` (Phase 1)
