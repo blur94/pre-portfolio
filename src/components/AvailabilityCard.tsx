@@ -24,11 +24,12 @@ export function AvailabilityCard() {
           className="inline-block size-2 rounded-full"
           style={{
             backgroundColor: "var(--accent-primary)",
-            boxShadow: "0 0 0 4px color-mix(in oklab, var(--accent-primary) 24%, transparent)",
+            boxShadow:
+              "0 0 0 4px color-mix(in oklab, var(--accent-primary) 24%, transparent)",
           }}
         />
         <span
-          className="text-xs font-semibold uppercase tracking-[0.1em]"
+          className="text-xs font-semibold uppercase tracking-widest"
           style={{
             fontFamily: "var(--font-heading)",
             color: "var(--text-secondary)",
@@ -62,7 +63,8 @@ export function AvailabilityCard() {
             color: "var(--text-muted)",
           }}
         >
-          Lead times measured in weeks, not months. Best fit for 4–12 week engagements.
+          Lead times measured in weeks, not months. Best fit for 4–12 week
+          engagements.
         </p>
       </div>
 
@@ -111,11 +113,11 @@ export function AvailabilityCard() {
           }}
         >
           <a
-            href="mailto:hello@gileadodo.xyz"
+            href="mailto:hello@gileadodo.com"
             className="underline transition-opacity hover:opacity-70"
             style={{ color: "var(--text-primary)" }}
           >
-            hello@gileadodo.xyz
+            hello@gileadodo.com
           </a>
         </dd>
 
