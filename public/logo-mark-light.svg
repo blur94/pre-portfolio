@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Gilead Odo mark">
+  <rect width="512" height="512" rx="96" fill="#ffffff"></rect>
+  <g fill="none" stroke="#050505" stroke-width="36" stroke-linecap="butt" stroke-linejoin="miter">
+    <circle cx="322" cy="256" r="148"></circle>
+    <path d="M252 132c-29-19-68-27-106-17C69 135 22 211 42 288s96 124 173 104c61-16 103-69 103-136H177"></path>
+  </g>
+</svg>

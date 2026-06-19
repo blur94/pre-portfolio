@@ -35,3 +35,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 sendgrid.env
+
+# playwright browser automation artifacts
+.playwright-mcp/
+.playwright-cli/
+.gstack/
+.handoff/
+output/playwright/
+output/*.png
+research/screenshots/
