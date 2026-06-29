@@ -7,6 +7,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
+### 2026-06-29 — Writing "Coming Soon" page
+
+- `src/components/Nav.tsx`: pointed the **Writing** nav link at the new `/writing` route and removed the "Coming soon" placeholder treatment (the disabled `<span>` on desktop and the "Soon" badge on mobile). The link now renders as a regular nav item in both layouts.
+- `src/app/writing/page.tsx` (new): polished, vertically + horizontally centered "Coming Soon." page matching the design system. Instrument Serif display heading with dimmed first word, Visby CF eyebrow, Inter muted copy, a subtle lucide `PenLine` icon mark, and a pill CTA back to `/works`. Responsive via `clamp()` heading and fluid padding; no new dependencies or assets. `pnpm lint` passes.
+- `src/components/Footer.tsx`: pointed the footer's **Writing** link at `/writing` (was a `null` "Coming soon" placeholder), matching the navbar.
+- No-vertical-scroll on the writing page: the section centers via `flex-1` (`md:py-0`, no redundant `py-24`), and a scoped `body:has([data-fit-viewport]) footer { margin-top: 0 }` rule in `globals.css` drops the footer's standard 120px top gap on this page only. Verified zero overflow at 1920×1080, 1536×864, 1440×900, 1366×768, and 1280×720; the footer's gap is unchanged on all other pages.
+
 ### QA Session — 2026-05-29 ("Visit project" link for live works)
 
 **Agents employed:** `plinth-data-assets-integrator` (Phase 1 — data), `plinth-page-assembler` (Phase 2 — UI)
