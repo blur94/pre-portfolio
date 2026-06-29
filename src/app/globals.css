@@ -296,3 +296,10 @@
 [data-theme="light"] .theme-toggle__moon {
   display: block;
 }
+
+/* Full-viewport placeholder pages (e.g. /writing) center their content via
+   flex-1 and don't need the footer's standard top gap — dropping it lets the
+   nav + content + footer fit within the viewport without vertical scroll. */
+body:has([data-fit-viewport]) footer {
+  margin-top: 0;
+}

@@ -18,7 +18,7 @@ import {
 
 const navLinks = [
   { label: "Work", href: "/works" },
-  { label: "Writing", href: null }, // placeholder — no route yet
+  { label: "Writing", href: "/writing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -73,36 +73,21 @@ export function Nav() {
             const active = isActive(link.href);
             return (
               <div key={link.label} className="relative">
-                {link.href ? (
-                  <Link
-                    href={link.href}
-                    className="flex min-h-11 items-center px-4 text-xl transition-colors"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontWeight: 500,
-                      letterSpacing: "-0.02em",
-                      color: active
-                        ? "var(--text-primary, var(--foreground))"
-                        : "var(--text-muted, var(--muted-foreground))",
-                    }}
-                    aria-current={active ? "page" : undefined}
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <span
-                    className="flex min-h-11 cursor-not-allowed items-center px-4 text-sm opacity-40"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontWeight: 500,
-                      letterSpacing: "-0.02em",
-                      color: "var(--text-muted, var(--muted-foreground))",
-                    }}
-                    title="Coming soon"
-                  >
-                    {link.label}
-                  </span>
-                )}
+                <Link
+                  href={link.href}
+                  className="flex min-h-11 items-center px-4 text-xl transition-colors"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    fontWeight: 500,
+                    letterSpacing: "-0.02em",
+                    color: active
+                      ? "var(--text-primary, var(--foreground))"
+                      : "var(--text-muted, var(--muted-foreground))",
+                  }}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
                 {/* Active 2px lime underline below nav bar */}
                 {active && (
                   <span
@@ -182,27 +167,6 @@ export function Nav() {
               <nav className="flex flex-col gap-2" aria-label="Mobile primary">
                 {navLinks.map((link) => {
                   const active = isActive(link.href);
-
-                  if (!link.href) {
-                    return (
-                      <span
-                        key={link.label}
-                        className="flex min-h-12 cursor-not-allowed items-center justify-between rounded-2xl border px-4 text-lg opacity-50"
-                        style={{
-                          borderColor: "var(--border)",
-                          color: "var(--text-muted, var(--muted-foreground))",
-                          fontFamily: "var(--font-heading)",
-                          fontWeight: 500,
-                        }}
-                        title="Coming soon"
-                      >
-                        {link.label}
-                        <span className="text-xs uppercase tracking-[0.12em]">
-                          Soon
-                        </span>
-                      </span>
-                    );
-                  }
 
                   return (
                     <Link

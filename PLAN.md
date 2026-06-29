@@ -36,5 +36,5 @@ Keep this lean. Remove completed work. Focus on active execution only.
 
 - PWA manifest and icons (already added per git history)
 - SEO metadata polish per page
-- Blog / article section (referenced in typography scale, Writing nav link is a placeholder)
+- Blog / article section (referenced in typography scale; `/writing` now ships a "Coming Soon" placeholder page and the Writing nav link points to it)
 - Light mode polish (dark-first, light mode is secondary)
